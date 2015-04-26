@@ -1,0 +1,8 @@
+April 19 2015 - Giffen
+	made backbuffer clear hellish fuschia per tradition
+	switched gizmos to 2d so scaling doesn't dissappear them
+	ortho camera's "size" param is HALF the height of the frustum, in unity units.
+	note - Unity appears to follow LEFT HANDedness.  xy as expected, z+ into screen.
+	aimed camera at [128,120], and set it up for 1:1 pixel display in a 256x240 display
+	shitty 256x240 background added, sprite set to 1:1 pixel units, origin bottom left.
+	shitty 4 frame animating sprite added
