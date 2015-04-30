@@ -1,18 +1,107 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class MovementHandler : MonoBehaviour {
+
+
+public class MovementHandler : MonoBehaviour 
+{
+	public enum Player
+	{
+		One,
+		Two,
+		Three,
+		Four
+	};
+
+		// public so you can select what player this script is attached to.
+	public Player playerIndex = Player.One;
+
+
+	private List<SimpleButtonPress> m_buttonHandlers = new List<SimpleButtonPress>();
 
 	// Use this for initialization
 	void Start () 
 	{
 		this.gameObject.GetComponent<Rigidbody2D>().AddRelativeForce( new Vector2( 0.707f, 0.707f ) * 40, ForceMode2D.Impulse );
+
+			// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)
+		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
+		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FirePaper", ThrowPaper));
+		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireScissors", ThrowScissors));
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		this.gameObject.transform.Translate(Input.GetAxis("Horizontal") * 1.0f, 0.0f, 0.0f);
-		this.gameObject.transform.Translate(0.0f, Input.GetAxis("Vertical") * 1.0f, 0.0f);
+		foreach (SimpleButtonPress btn in m_buttonHandlers)
+		{
+			btn.Update();
+		}
+	}
+
+	void ThrowRock()
+	{
+		Debug.Log ("Threw a rock");
+	}
+
+	void ThrowPaper()
+	{
+		Debug.Log ("Threw a Paper");
+	}
+
+	void ThrowScissors()
+	{
+		Debug.Log ("Threw a Scissors");
 	}
 }
+
+// not..... really sure where to put this >_>
+public class SimpleButtonPress
+{
+	public delegate void CallbackFunction();
+	
+	private CallbackFunction 	m_function;
+	private string 				m_inputAxis;
+	private bool				m_isPressed;
+	
+	
+	public bool IsPressed 		{ get { return m_isPressed; } }
+	
+	public SimpleButtonPress(string inputAxis, CallbackFunction func)
+	{
+		m_function = func;
+		m_inputAxis = inputAxis;
+	}
+	
+	public void Update()
+	{
+		float inputValue = Input.GetAxisRaw (m_inputAxis);
+		
+		if (!IsPressed) 
+		{
+			if (Mathf.Approximately(inputValue, 1.0f))
+			{
+				Fire();
+			}
+		}
+		else
+		{
+			if (Mathf.Approximately(inputValue, 0.0f))
+			{
+				m_isPressed = false;
+			}
+		}
+	}
+	
+	void Fire()
+	{
+		m_isPressed = true;
+		
+		if (m_function != null) 
+		{
+			m_function();
+		}
+	}
+}
+
