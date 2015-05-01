@@ -23,8 +23,6 @@ public class MovementHandler : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		this.gameObject.GetComponent<Rigidbody2D>().AddRelativeForce( new Vector2( 0.707f, 0.707f ) * 40, ForceMode2D.Impulse );
-
 			// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FirePaper", ThrowPaper));

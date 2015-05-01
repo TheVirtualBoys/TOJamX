@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 2091f351437d85242b8289b455d59da7
-timeCreated: 1430507674
+guid: 8c880e2273b7fa240ba421e1b9ecefe4
+timeCreated: 1430508963
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences:
-  - spritePrefab: {instanceID: 0}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
