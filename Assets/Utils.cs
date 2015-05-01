@@ -8,6 +8,7 @@ public static class Utils
 	public delegate void CallbackEvent<T>(T value);
 	public delegate T ResultEvent<out T>();
 	private static List<Timer> timers = new List<Timer>();
+	private static long timerID = 0;
 
 	public static void Update(float dt)
 	{
@@ -18,6 +19,11 @@ public static class Utils
 				timers.RemoveAt( i-- ); //counter increment, after i++ it will mean a new timer
 			}
 		}
+	}
+
+	public static void RemoveTimer(Timer t)
+	{
+		timers.Remove(t);
 	}
 
 	public static Timer AddTimer(float time, EmptyCallback callback)
