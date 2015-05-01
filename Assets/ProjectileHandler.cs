@@ -3,13 +3,13 @@ using System.Collections;
 
 public class ProjectileHandler : MonoBehaviour {
 
+	public float duration; //Seconds of travel from start to end
 	public Vector2 start;
 	public Vector2 middle;
 	public Vector2 end;
 	public int arcs;
 	public float variance;
 	private float m_startTime;
-	private static int sm_totalProjectilesEver = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -18,7 +18,7 @@ public class ProjectileHandler : MonoBehaviour {
 
 		transform.position = start; //avoid flicker from transform start pos to spline start
 
-		float variation = ( sm_totalProjectilesEver++ % arcs ) / ((float)arcs - 1); //variation needs to be 0-1 inclusive
+		float variation = (float)Random.Range( 0, arcs ) / (float)(arcs - 1); //variation needs to be 0-1 inclusive
 		
 		//find perpendicular to path
 		Vector2 line = end - start;
@@ -34,10 +34,12 @@ public class ProjectileHandler : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		float elapsed = Time.time - m_startTime;
-		float arc = Mathf.Min( elapsed / 10.0f, 1.0f );
+		float arc = Mathf.Min( elapsed / duration, 1.0f );
 		Vector2 splinePos = Utils.SplineLerp( start, middle, end, arc );
 
 		transform.position = new Vector3( splinePos.x, splinePos.y, 1.0f );
+
+		if ( arc == 1.0f ) { Destroy( this.gameObject ); }
 
 	}
 }
