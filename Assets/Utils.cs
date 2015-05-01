@@ -13,7 +13,10 @@ public static class Utils
 	{
 		for (int i = 0; i < timers.Count; ++i)
 		{
-			timers[i].Update(dt);
+			if ( timers[i].Update(dt) )
+			{	//timer expired
+				timers.RemoveAt( i-- ); //counter increment, after i++ it will mean a new timer
+			}
 		}
 	}
 

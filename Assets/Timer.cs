@@ -25,12 +25,14 @@ public class Timer
 		callback -= func;
 	}
 
-	// Update is called once per frame
-	public void Update(float dt)
+	// Update is called once per frame, returns true if expired
+	public bool Update(float dt)
 	{
 		elapsedTime += Time.deltaTime;
 		if (elapsedTime >= triggerTime) {
 			callback();
+			return true;
 		}
+		return false;
 	}
 }
