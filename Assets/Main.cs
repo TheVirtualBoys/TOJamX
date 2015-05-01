@@ -3,11 +3,14 @@ using System.Collections;
 
 public class Main : MonoBehaviour
 {
+	public short numPlayers = 2;
+	//public Player players[];
 	public GameObject spritePrefab;
 
 	// Use this for initialization
 	void Start()
 	{
+		Object.DontDestroyOnLoad(this);
 		Utils.AddTimer( 1, SpawnPrefab );
 	}
 	
