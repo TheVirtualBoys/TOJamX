@@ -10,8 +10,6 @@ GameObject:
   - 4: {fileID: 465232}
   - 212: {fileID: 21229742}
   - 95: {fileID: 9596526}
-  - 50: {fileID: 5013946}
-  - 61: {fileID: 6106372}
   - 114: {fileID: 11497734}
   m_Layer: 0
   m_Name: animSprite_0
@@ -32,34 +30,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!50 &5013946
-Rigidbody2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169128}
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: .0500000007
-  m_GravityScale: 1
-  m_FixedAngle: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
---- !u!61 &6106372
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 169128}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 16, y: 16}
 --- !u!95 &9596526
 Animator:
   serializedVersion: 3
@@ -88,6 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c880e2273b7fa240ba421e1b9ecefe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  start: {x: 0, y: 0}
+  middle: {x: 128, y: 128}
+  end: {x: 256, y: 240}
+  arcs: 5
+  variance: 100
 --- !u!212 &21229742
 SpriteRenderer:
   m_ObjectHideFlags: 1

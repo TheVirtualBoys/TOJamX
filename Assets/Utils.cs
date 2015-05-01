@@ -31,4 +31,9 @@ public static class Utils
 		timers.Add(timer);
 		return timer;
 	}
+
+	public static Vector2 SplineLerp( Vector2 start, Vector2 middle, Vector2 end, float t )
+	{
+		return Vector2.Lerp( Vector2.Lerp( start, middle, t ), Vector2.Lerp( middle, end, t ), t );
+	}
 }
