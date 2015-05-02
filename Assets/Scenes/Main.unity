@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2091f351437d85242b8289b455d59da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numPlayers: 2
 --- !u!4 &814656834
 Transform:
   m_ObjectHideFlags: 0
@@ -474,7 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a65f9018168b4e147ae53d16d16e53cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spritePrefab: {fileID: 0}
+  spritePrefab: {fileID: 169128, guid: 9bc817e476e9e4845bc1bfcb29828bbf, type: 2}
   dbgSpawnWaitDuration: .150000006
 --- !u!4 &2012081627
 Transform:

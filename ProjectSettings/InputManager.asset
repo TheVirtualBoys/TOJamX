@@ -205,9 +205,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
     invert: 0
     type: 2
@@ -221,9 +221,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
     invert: 0
     type: 2
@@ -237,9 +237,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
     invert: 0
     type: 2
@@ -253,9 +253,9 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
     invert: 0
     type: 2
@@ -269,11 +269,11 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
-    dead: .300000012
-    sensitivity: 1000
+    gravity: 10
+    dead: .5
+    sensitivity: 10
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 1
@@ -285,11 +285,11 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 2
@@ -301,11 +301,11 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 3
@@ -317,11 +317,11 @@ InputManager:
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 10
     dead: .300000012
-    sensitivity: 1000
+    sensitivity: 10
     snap: 0
-    invert: 0
+    invert: 1
     type: 2
     axis: 1
     joyNum: 4

@@ -7,7 +7,7 @@ public class Main : MonoBehaviour
 	static GameObject originalInstance = null;
 
 	//fun datas of funtimes
-	public short numPlayers = 2;
+	public static short numPlayers = 2;
 	//public Player players[];
 
 	void Start()
