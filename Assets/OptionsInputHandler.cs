@@ -5,14 +5,13 @@ public class OptionsInputHandler : MonoBehaviour
 {
 	public PlayerIndex playerID = PlayerIndex.Max;
 	GameObject[] grid;
-	float dirRepeat;
-	float dirRepeatTime = 0.7f;
+	float lastInputTime = 0.0f;
+	float repeatTime = 0.3f;
 	byte selection;
 
 	void Start()
 	{
 		if (Main.numPlayers < (int)playerID + 1) Destroy(this);
-		float dirRepeat = 0.0f;
 		grid = new GameObject[9];
 		for (int i = 0; i < 9; ++i)
 		{
@@ -35,18 +34,17 @@ public class OptionsInputHandler : MonoBehaviour
 			break;
 		}
 		gameObject.transform.position = grid[selection].transform.position;
+		lastInputTime = Time.timeSinceLevelLoad;
 	}
 
 	void Update()
 	{
-		dirRepeat += Time.deltaTime;
-		if (dirRepeat < dirRepeatTime)
+		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)
 		{
 			return;
 		}
-		dirRepeat = 0.0f;
-		float x = Input.GetAxis("Horiz" + playerID);
-		float y = Input.GetAxis("Vert" + playerID);
+		float x            = Input.GetAxisRaw("Horiz" + playerID);
+		float y            = Input.GetAxisRaw("Vert" + playerID);
 		byte lastSelection = selection;
 
 		Debug.Log(playerID + " " + x + "," + y);
@@ -191,6 +189,7 @@ public class OptionsInputHandler : MonoBehaviour
 		{
 			// play a sound and update graphics
 			gameObject.transform.position = grid[selection].transform.position;
+			lastInputTime = Time.timeSinceLevelLoad;
 		}
 	}
 }
