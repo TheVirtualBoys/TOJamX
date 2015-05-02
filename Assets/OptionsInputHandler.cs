@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class OptionsInputHandler : MonoBehaviour
@@ -6,7 +6,6 @@ public class OptionsInputHandler : MonoBehaviour
 	public PlayerIndex playerID = PlayerIndex.Max;
 	float lastInputTime         = 0.0f;
 	float repeatTime            = 0.3f;
-	public Sprite[] charSprites;
 	GameObject[] grid;
 	SpriteRenderer fullPlayer;
 	byte selection;
@@ -20,12 +19,15 @@ public class OptionsInputHandler : MonoBehaviour
 			return;
 		}
 		fullPlayer = GameObject.Find("ActiveChar" + playerID).GetComponent<SpriteRenderer>();
-		charSprites = Resources.LoadAll<Sprite>("character_portraits");
 		grid = new GameObject[(int)Characters.Max];
 		for (int i = 0; i < (int)Characters.Max; ++i)
 		{
 			// populate the grid with Char0, Char1... for positioning
 			grid[i] = GameObject.Find("Char" + i);
+			GameObject character = CharacterFactory.GetInst().Create( (CharacterFactory.Characters)i );
+			character.gameObject.transform.parent = grid[i].gameObject.transform;
+			character.gameObject.transform.position = grid[i].gameObject.transform.position;
+
 		}
 
 		switch (playerID)
@@ -51,7 +53,7 @@ public class OptionsInputHandler : MonoBehaviour
 	{
 		if (index >= 0 && index < (int)Characters.Max)
 		{
-			fullPlayer.sprite = charSprites[index];
+			fullPlayer.sprite = grid[(int)index].transform.GetChild (0).GetComponent<SpriteRenderer>().sprite;
 			return;
 		}
 		Debug.LogWarning("Tried setting index out of bounds");
