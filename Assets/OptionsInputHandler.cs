@@ -7,19 +7,30 @@ public class OptionsInputHandler : MonoBehaviour
 	float lastInputTime         = 0.0f;
 	float repeatTime            = 0.3f;
 	static GameObject[] grid;
-	SpriteRenderer fullPlayer;
+	Player player;
 	byte selection;
-	bool disabled = false;
 
 	void Start()
 	{
+		// destroy Players 3 and 4 "full body" sprites
 		if (Main.numPlayers < (int)playerID + 1)
 		{
 			Destroy(GameObject.Find("ActiveChar" + playerID));
 			Destroy(this);
 			return;
 		}
-		fullPlayer = GameObject.Find("ActiveChar" + playerID).GetComponent<SpriteRenderer>();
+
+		if (Main.childPlayers[(int)playerID] == null)
+		{
+			GameObject go = new GameObject("Player" + playerID);
+			player = go.AddComponent<Player>();
+			player.playerIndex = playerID;
+			Main.childPlayers[(int)playerID] = player;
+		}
+
+		Transform parentTransform = GameObject.Find("ActiveChar" + playerID).transform;
+		player.transform.parent = parentTransform;
+		player.transform.position = parentTransform.position;
 
 		//just setup the grid once (this script runs char picker)
 		if ( grid == null )
@@ -32,7 +43,6 @@ public class OptionsInputHandler : MonoBehaviour
 				GameObject character = CharacterFactory.GetInst().Create( (CharacterFactory.Characters)i );
 				character.gameObject.transform.parent = grid[i].gameObject.transform;
 				character.gameObject.transform.position = grid[i].gameObject.transform.position;
-
 			}
 		}
 
@@ -51,7 +61,6 @@ public class OptionsInputHandler : MonoBehaviour
 				selection  = 8;
 			break;
 		}
-		gameObject.transform.position = grid[selection].transform.position + new Vector3(0.0f, 0.0f, -1.0f);
 		SetPlayerSprite(selection);
 	}
 
@@ -59,7 +68,11 @@ public class OptionsInputHandler : MonoBehaviour
 	{
 		if (index >= 0 && index < (int)CharacterFactory.Characters.Max)
 		{
-			fullPlayer.sprite = grid[(int)index].transform.GetChild (0).GetComponent<SpriteRenderer>().sprite;
+			// todo change fullPlayer line.
+			//player.sprite                 = grid[(int)index].transform.GetChild(0).GetComponent<SpriteRenderer>().sprite;
+			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
+			// move the select box to the selected character.
+			gameObject.transform.position = grid[selection].transform.position + new Vector3(0.0f, 0.0f, -1.0f);
 			return;
 		}
 		Debug.LogWarning("Tried setting index out of bounds");
@@ -67,14 +80,13 @@ public class OptionsInputHandler : MonoBehaviour
 
 	void Update()
 	{
-		if (disabled) return;
 		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Dear god the casts!
 		{
 		//if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!
 			// select the highlighted player.
 			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
 			gameObject.GetComponent<FlashOnSelect>().stopFlashing = true;
-			disabled = true;
+			this.enabled = false;
 			return;
 		}
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)
@@ -226,8 +238,8 @@ public class OptionsInputHandler : MonoBehaviour
 		{
 			// play a sound and update graphics
 			lastInputTime = Time.timeSinceLevelLoad;
-			gameObject.transform.position = grid[selection].transform.position + new Vector3(0.0f, 0.0f, -1.0f);
 			SetPlayerSprite(selection);
 		}
 	}
 }
+

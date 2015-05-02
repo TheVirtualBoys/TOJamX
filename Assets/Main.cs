@@ -8,8 +8,9 @@ public class Main : MonoBehaviour
 	static GameObject originalInstance = null;
 
 	//fun datas of funtimes
-	public static short numPlayers     = 2;
-	static List<Player> childPlayers   = new List<Player>();
+	public static short numPlayers      = 2;
+	public const short MAX_PLAYERS      = 4;
+	public static Player[] childPlayers = new Player[Main.MAX_PLAYERS];
 
 	void Start()
 	{
@@ -24,7 +25,6 @@ public class Main : MonoBehaviour
 		{
 			Destroy( this.gameObject );
 		}
-		gameObject.GetComponentsInChildren<Player>(true, childPlayers);
 	}
 	
 	// Update is called once per frame
