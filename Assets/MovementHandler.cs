@@ -3,19 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
 public class MovementHandler : MonoBehaviour 
 {
-	public enum Player
-	{
-		One,
-		Two,
-		Three,
-		Four
-	};
-
-		// public so you can select what player this script is attached to.
-	public Player playerIndex = Player.One;
+	// public so you can select what player this script is attached to.
+	public PlayerIndex playerIndex = PlayerIndex.One;
 
 
 	private List<SimpleButtonPress> m_buttonHandlers = new List<SimpleButtonPress>();
