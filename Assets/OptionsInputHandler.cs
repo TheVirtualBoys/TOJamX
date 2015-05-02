@@ -21,8 +21,8 @@ public class OptionsInputHandler : MonoBehaviour
 		}
 		fullPlayer = GameObject.Find("ActiveChar" + playerID).GetComponent<SpriteRenderer>();
 		charSprites = Resources.LoadAll<Sprite>("character_portraits");
-		grid = new GameObject[(int)Characters.MAX];
-		for (int i = 0; i < (int)Characters.MAX; ++i)
+		grid = new GameObject[(int)Characters.Max];
+		for (int i = 0; i < (int)Characters.Max; ++i)
 		{
 			// populate the grid with Char0, Char1... for positioning
 			grid[i] = GameObject.Find("Char" + i);
@@ -43,13 +43,13 @@ public class OptionsInputHandler : MonoBehaviour
 				selection  = 8;
 			break;
 		}
-		gameObject.transform.position = grid[selection].transform.position;
+		gameObject.transform.position = grid[selection].transform.position + new Vector3(0.0f, 0.0f, -1.0f);
 		SetPlayerSprite(selection);
 	}
 
 	void SetPlayerSprite(byte index)
 	{
-		if (index >= 0 && index < (int)Characters.MAX)
+		if (index >= 0 && index < (int)Characters.Max)
 		{
 			fullPlayer.sprite = charSprites[index];
 			return;
@@ -59,7 +59,12 @@ public class OptionsInputHandler : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Joystick1Button0))
+		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!
+		{
+			// select the highlighted player.
+			Main.SetPlayerCharacter(playerID, (Characters)selection);
+			return;
+		}
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)
 		{
 			return;
