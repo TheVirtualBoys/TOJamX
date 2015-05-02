@@ -60,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: .5
   start: {x: 30, y: 30}
-  middle: {x: 128, y: 90}
+  middle: {x: 128, y: 200}
   end: {x: 226, y: 30}
   arcs: 3
   variance: 30

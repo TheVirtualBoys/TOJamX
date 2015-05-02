@@ -28,7 +28,7 @@ public class Timer
 	// Update is called once per frame, returns true if expired
 	public bool Update(float dt)
 	{
-		elapsedTime += Time.deltaTime;
+		elapsedTime += dt;
 		if (elapsedTime >= triggerTime) {
 			callback();
 			return true;
