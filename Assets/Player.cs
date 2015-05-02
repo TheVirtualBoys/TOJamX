@@ -5,13 +5,14 @@ using System.Collections;
 
 public class Player : GameplayInputHandler
 {
-	public CharacterFactory.Characters playerClass = CharacterFactory.Characters.Max;
+	public CharacterFactory.Characters playerClass;
+	private GameObject m_childPlayerPrefab = null;
 	public Player m_targetPlayer = null;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-		playerClass = CharacterFactory.Characters.Max;
+		SetCharacter( playerClass );
 	}
 	
 	// Update is called once per frame
@@ -19,23 +20,41 @@ public class Player : GameplayInputHandler
 		base.Update();
 	}
 
+	public void SetCharacter( CharacterFactory.Characters which )
+	{
+		if ( playerClass != which || m_childPlayerPrefab == null )
+		{
+			if ( m_childPlayerPrefab != null ) { Destroy ( m_childPlayerPrefab ); }
+
+			m_childPlayerPrefab = CharacterFactory.GetInst().Create( which );
+			m_childPlayerPrefab.gameObject.transform.parent = transform;
+			m_childPlayerPrefab.gameObject.transform.position = transform.position;
+
+			playerClass = which;
+		}
+	}
+
+	private void createProjectile( RPSFactory.Type type )
+	{
+		GameObject thing = RPSFactory.GetInst().Create( type );
+		thing.transform.parent = transform;
+		ProjectileHandler ph = thing.GetComponent<ProjectileHandler>();
+		ph.start = transform.position;
+	}
+
 	public override void ThrowRock()
 	{
-		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Rock );
-		thing.transform.parent = transform;
-
+		createProjectile( RPSFactory.Type.Rock );
 	}
 	
 	public override void ThrowPaper()
 	{
-		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Paper );
-		thing.transform.parent = transform;
+		createProjectile( RPSFactory.Type.Paper );
 	}
 	
 	public override void ThrowScissors()
 	{
-		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Scissors );
-		thing.transform.parent = transform;
+		createProjectile( RPSFactory.Type.Scissors );
 	}
 
 }

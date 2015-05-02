@@ -36,6 +36,6 @@ public class Main : MonoBehaviour
 
 	public static void SetPlayerCharacter(PlayerIndex player, CharacterFactory.Characters character)
 	{
-		//TODOJEFFGIFFENchildPlayers[(int)player].SetCharacter( character );
+		childPlayers[(int)player].SetCharacter( character );
 	}
 }
