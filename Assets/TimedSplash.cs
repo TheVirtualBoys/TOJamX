@@ -3,12 +3,13 @@ using System.Collections;
 
 public class TimedSplash : MonoBehaviour
 {
+	public float secondsToWait = 5.0f;
 	public string transitionLevel;
 	private Timer timer;
 
 	void Start()
 	{
-		timer = Utils.AddTimer(5.0f, ChangeScene);
+		timer = Utils.AddTimer(secondsToWait, ChangeScene);
 	}
 
 	void Update()
