@@ -25,12 +25,21 @@ public class GameplayInputHandler : MonoBehaviour
 	// Use this for initialization
 	public virtual void Start () 
 	{
-		// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)A
-		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
-		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FirePaper", ThrowPaper));
-		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireScissors", ThrowScissors));
+		InputEnabled ( true );
 	}
-	
+
+	public void InputEnabled( bool on )
+	{
+		m_buttonHandlers.Clear();
+		if ( on )
+		{
+			// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)A
+			m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
+			m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FirePaper", ThrowPaper));
+			m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireScissors", ThrowScissors));
+		}
+	}
+		
 	// Update is called once per frame
 	public virtual void Update () 
 	{

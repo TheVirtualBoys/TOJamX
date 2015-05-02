@@ -7,6 +7,19 @@ public class LevelScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		//init players for this state
+		for( int i = 0; i < Main.numPlayers; i++ )
+		{
+			Player p = Main.GetPlayer ( i );
+			//listen to button pushes
+			p.InputEnabled( true );
+			//anchor them to level spots
+			Transform anchor = GameObject.Find ("PlayerAnchor" + i).transform;
+			p.gameObject.transform.parent = anchor;
+			p.gameObject.transform.position = anchor.position;
+		}
+
 //		m_elapsedSinceSpawn = 0;
 	}
 	
