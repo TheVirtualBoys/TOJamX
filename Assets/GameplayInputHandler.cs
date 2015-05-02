@@ -8,6 +8,17 @@ public class GameplayInputHandler : MonoBehaviour
 	// public so you can select what player this script is attached to.
 	public PlayerIndex playerIndex = PlayerIndex.One;
 
+	// Active deadzone is the minimum amount of joystick movement needed to consider any input.
+	public float joystickActiveDeadzone = 0.5f;
+
+	// Minimum deadzone is the amount of movement needed to be considered for input after either Horiz or Vert pass the active deadzone.
+	public float joystickMinimumDeadzone = 0.3f;
+
+	// 2 deadzones are used to determine we want to move the joystick AND we know if it's going in a diagonal direction on the first check.
+
+
+	// x and y joystick directions. x and y will either be 0 or +- 1
+	private Vector2 m_joystickDirection = new Vector2 (0.0f, 0.0f);
 
 	private List<SimpleButtonPress> m_buttonHandlers = new List<SimpleButtonPress>();
 
@@ -27,6 +38,48 @@ public class GameplayInputHandler : MonoBehaviour
 		{
 			btn.Update();
 		}
+
+		// check for joystick handling.
+
+		m_joystickDirection.x = 0.0f;
+		m_joystickDirection.y = 0.0f;
+
+		float horizontalInput = Input.GetAxis ("Horiz" + playerIndex.ToString());
+		float verticalInput = Input.GetAxis ("Vert" + playerIndex.ToString ());
+
+		if (horizontalInput > joystickActiveDeadzone || verticalInput > joystickActiveDeadzone) {
+
+			// we have active joystick input.
+
+			if (Mathf.Abs(horizontalInput) > joystickMinimumDeadzone)
+			{
+				if (horizontalInput > 0.0f)
+				{
+					m_joystickDirection.x = 1.0f;
+				}
+				else
+				{
+					m_joystickDirection.x = -1.0f;
+				}
+			}
+
+			if (Mathf.Abs(verticalInput) > joystickMinimumDeadzone)
+			{
+				if (horizontalInput > 0.0f)
+				{
+					m_joystickDirection.y = 1.0f;
+				}
+				else
+				{
+					m_joystickDirection.y = -1.0f;
+				}
+			}
+		}
+	}
+
+	public Vector2 GetJoystickDirection()
+	{
+		return m_joystickDirection;
 	}
 
 	public virtual void ThrowRock()
