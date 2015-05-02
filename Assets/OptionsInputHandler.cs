@@ -6,7 +6,7 @@ public class OptionsInputHandler : MonoBehaviour
 	public PlayerIndex playerID = PlayerIndex.Max;
 	float lastInputTime         = 0.0f;
 	float repeatTime            = 0.3f;
-	GameObject[] grid;
+	static GameObject[] grid;
 	SpriteRenderer fullPlayer;
 	byte selection;
 
@@ -19,15 +19,20 @@ public class OptionsInputHandler : MonoBehaviour
 			return;
 		}
 		fullPlayer = GameObject.Find("ActiveChar" + playerID).GetComponent<SpriteRenderer>();
-		grid = new GameObject[(int)Characters.Max];
-		for (int i = 0; i < (int)Characters.Max; ++i)
-		{
-			// populate the grid with Char0, Char1... for positioning
-			grid[i] = GameObject.Find("Char" + i);
-			GameObject character = CharacterFactory.GetInst().Create( (CharacterFactory.Characters)i );
-			character.gameObject.transform.parent = grid[i].gameObject.transform;
-			character.gameObject.transform.position = grid[i].gameObject.transform.position;
 
+		//just setup the grid once (this script runs char picker)
+		if ( grid == null )
+		{
+			grid = new GameObject[(int)Characters.Max];
+			for (int i = 0; i < (int)Characters.Max; ++i)
+			{
+				// populate the grid with Char0, Char1... for positioning
+				grid[i] = GameObject.Find("Char" + i);
+				GameObject character = CharacterFactory.GetInst().Create( (CharacterFactory.Characters)i );
+				character.gameObject.transform.parent = grid[i].gameObject.transform;
+				character.gameObject.transform.position = grid[i].gameObject.transform.position;
+
+			}
 		}
 
 		switch (playerID)
