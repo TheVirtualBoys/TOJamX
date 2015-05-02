@@ -9,6 +9,7 @@ public class OptionsInputHandler : MonoBehaviour
 	static GameObject[] grid;
 	SpriteRenderer fullPlayer;
 	byte selection;
+	bool disabled = false;
 
 	void Start()
 	{
@@ -66,10 +67,13 @@ public class OptionsInputHandler : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!
+		if (disabled) return;
+		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Dear god the casts!
 		{
 			// select the highlighted player.
 			Main.SetPlayerCharacter(playerID, (Characters)selection);
+			gameObject.GetComponent<FlashOnSelect>().stopFlashing = true;
+			disabled = true;
 			return;
 		}
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)
@@ -222,7 +226,7 @@ public class OptionsInputHandler : MonoBehaviour
 		{
 			// play a sound and update graphics
 			lastInputTime = Time.timeSinceLevelLoad;
-			gameObject.transform.position = grid[selection].transform.position;
+			gameObject.transform.position = grid[selection].transform.position + new Vector3(0.0f, 0.0f, -1.0f);
 			SetPlayerSprite(selection);
 		}
 	}
