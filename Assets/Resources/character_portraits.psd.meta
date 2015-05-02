@@ -1,20 +1,18 @@
 fileFormatVersion: 2
-guid: b4ee5c5148ef351458fe19815cb61a6e
-timeCreated: 1430519235
+guid: 8d0265dd97748f34ca5c19939086a72a
+timeCreated: 1430514753
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: A
-    21300002: X
-    21300004: B
-    21300006: Y
-    21300008: Rock
-    21300010: Paper
-    21300012: Scissors
-    21300014: SelectP1
-    21300016: SelectP2
-    21300018: SelectP3
-    21300020: SelectP4
+    21300000: character_portraits_0
+    21300002: character_portraits_1
+    21300004: character_portraits_2
+    21300006: character_portraits_3
+    21300008: character_portraits_4
+    21300010: character_portraits_5
+    21300012: character_portraits_6
+    21300014: character_portraits_7
+    21300016: character_portraits_8
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -60,115 +58,95 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: A
+    - name: character_portraits_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
-        width: 16
-        height: 16
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: X
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: B
+    - name: character_portraits_1
       rect:
         serializedVersion: 2
         x: 32
-        y: 112
-        width: 16
-        height: 16
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Y
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 112
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Rock
+    - name: character_portraits_2
       rect:
         serializedVersion: 2
         x: 64
-        y: 112
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: -.939281464, y: .462124348}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Paper
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 112
-        width: 16
-        height: 16
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Scissors
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 112
-        width: 16
-        height: 16
-      alignment: 9
-      pivot: {x: -2.45431519, y: .00761413574}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SelectP1
+    - name: character_portraits_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
+        y: 32
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SelectP2
+    - name: character_portraits_4
       rect:
         serializedVersion: 2
         x: 32
-        y: 80
+        y: 32
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SelectP3
+    - name: character_portraits_5
       rect:
         serializedVersion: 2
         x: 64
-        y: 80
+        y: 32
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: SelectP4
+    - name: character_portraits_6
       rect:
         serializedVersion: 2
-        x: 96
-        y: 80
+        x: 0
+        y: 0
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_portraits_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: character_portraits_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
