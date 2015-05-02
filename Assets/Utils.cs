@@ -2,6 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 
+public enum PlayerIndex
+{
+	One,
+	Two,
+	Three,
+	Four,
+	Max
+};
+
 public static class Utils
 {
 	public delegate void EmptyCallback();

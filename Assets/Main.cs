@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Main : MonoBehaviour
 {
-	public short numPlayers = 2;
+	public static short numPlayers = 2;
 	//public Player players[];
 
 	// Use this for initialization
