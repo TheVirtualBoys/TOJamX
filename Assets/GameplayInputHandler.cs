@@ -23,7 +23,7 @@ public class GameplayInputHandler : MonoBehaviour
 	private List<SimpleButtonPress> m_buttonHandlers = new List<SimpleButtonPress>();
 
 	// Use this for initialization
-	void Start () 
+	public virtual void Start () 
 	{
 			// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
@@ -32,7 +32,7 @@ public class GameplayInputHandler : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	public virtual void Update () 
 	{
 		foreach (SimpleButtonPress btn in m_buttonHandlers)
 		{
