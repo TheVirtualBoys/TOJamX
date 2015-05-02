@@ -58,11 +58,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c880e2273b7fa240ba421e1b9ecefe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {x: 0, y: 0}
-  middle: {x: 128, y: 128}
-  end: {x: 256, y: 240}
-  arcs: 5
-  variance: 100
+  duration: .5
+  start: {x: 30, y: 30}
+  middle: {x: 128, y: 90}
+  end: {x: 226, y: 30}
+  arcs: 3
+  variance: 30
 --- !u!212 &21229742
 SpriteRenderer:
   m_ObjectHideFlags: 1
