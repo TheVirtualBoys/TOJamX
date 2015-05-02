@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class GameplayInputHandler : MonoBehaviour 
 {
 	// public so you can select what player this script is attached to.
-	public PlayerIndex playerIndex = PlayerIndex.One;
+	public PlayerIndex playerIndex = PlayerIndex.Max;
 
 	// Active deadzone is the minimum amount of joystick movement needed to consider any input.
 	public float joystickActiveDeadzone = 0.5f;
@@ -25,7 +25,7 @@ public class GameplayInputHandler : MonoBehaviour
 	// Use this for initialization
 	public virtual void Start () 
 	{
-			// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)
+		// we create simple button presses so we don't spam the functions when the button is pressed (only called once until the button is released completely)A
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireRock", ThrowRock));
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FirePaper", ThrowPaper));
 		m_buttonHandlers.Add (new SimpleButtonPress ("Player" + playerIndex.ToString () + "FireScissors", ThrowScissors));
