@@ -37,7 +37,6 @@ public class RPSFactory : MonoBehaviour {
 		};
 		
 		GameObject creation = Instantiate( prefab );
-		RPSLogic scriptInst = creation.GetComponent<RPSLogic>();
 		return (GameObject)creation;
 	}
 }		
