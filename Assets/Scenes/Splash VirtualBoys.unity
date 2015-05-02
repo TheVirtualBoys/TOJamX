@@ -237,7 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785b14728e21fc14083e5c6a1940a915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionLevel: Title
+  secondsToWait: 5
+  transitionLevel: Splash TOJam
 --- !u!4 &1576231893
 Transform:
   m_ObjectHideFlags: 0
