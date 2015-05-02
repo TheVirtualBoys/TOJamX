@@ -22,20 +22,21 @@ public class Player : GameplayInputHandler {
 
 	public override void ThrowRock()
 	{
-		GameObject rpsFactory = GameObject.Find("RPS");
-		GameObject rock = rpsFactory.GetComponent<RPSLogic>().Create( RPSLogic.Type.Rock );
-		rock.transform.parent = transform;
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Rock );
+		thing.transform.parent = transform;
 
 	}
 	
 	public override void ThrowPaper()
 	{
-		Debug.Log ("Threw a Paper");
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Paper );
+		thing.transform.parent = transform;
 	}
 	
 	public override void ThrowScissors()
 	{
-		Debug.Log ("Threw a Scissors");
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Scissors );
+		thing.transform.parent = transform;
 	}
 
 /*	//HACKJEFFGIFFEN dummy projectile spawns

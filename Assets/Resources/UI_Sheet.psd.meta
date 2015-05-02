@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 7ec0e1248e4782546845571e8fdeec61
-timeCreated: 1430519235
+timeCreated: 1430582950
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -107,8 +107,8 @@ TextureImporter:
         y: 112
         width: 16
         height: 16
-      alignment: 9
-      pivot: {x: -.939281464, y: .462124348}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: Paper
       rect:
@@ -127,8 +127,8 @@ TextureImporter:
         y: 112
         width: 16
         height: 16
-      alignment: 9
-      pivot: {x: -2.45431519, y: .00761413574}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: SelectP1
       rect:
