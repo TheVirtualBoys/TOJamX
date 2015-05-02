@@ -3,15 +3,16 @@ using System.Collections;
 
 
 
-public class Player : GameplayInputHandler {
-
-
-
+public class Player : GameplayInputHandler
+{
+	public Characters playerClass { get; set; }
 	public Player m_targetPlayer = null;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
+		playerClass = Characters.Max;
+		playerIndex = PlayerIndex.Max;
 	}
 	
 	// Update is called once per frame
@@ -22,20 +23,21 @@ public class Player : GameplayInputHandler {
 
 	public override void ThrowRock()
 	{
-		GameObject rpsFactory = GameObject.Find("RPS");
-		GameObject rock = rpsFactory.GetComponent<RPSLogic>().Create( RPSLogic.Type.Rock );
-		rock.transform.parent = transform;
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Rock );
+		thing.transform.parent = transform;
 
 	}
 	
 	public override void ThrowPaper()
 	{
-		Debug.Log ("Threw a Paper");
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Paper );
+		thing.transform.parent = transform;
 	}
 	
 	public override void ThrowScissors()
 	{
-		Debug.Log ("Threw a Scissors");
+		GameObject thing = RPSFactory.GetInst().Create( RPSFactory.Type.Scissors );
+		thing.transform.parent = transform;
 	}
 
 /*	//HACKJEFFGIFFEN dummy projectile spawns

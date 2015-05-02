@@ -1,54 +1,70 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &147052
+--- !u!1 &172628
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 477328}
-  - 212: {fileID: 21248842}
-  - 114: {fileID: 11411922}
+  - 4: {fileID: 400320}
+  - 212: {fileID: 21208562}
+  - 114: {fileID: 11422246}
+  - 114: {fileID: 11454808}
   m_Layer: 0
-  m_Name: Scissors
+  m_Name: RockPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &477328
+--- !u!4 &400320
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147052}
+  m_GameObject: {fileID: 172628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11411922
+--- !u!114 &11422246
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147052}
+  m_GameObject: {fileID: 172628}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bf15c317d033994db5af2b2c77ab75d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rockPrefab: {fileID: 0}
-  paperPrefab: {fileID: 0}
-  scissorsPrefab: {fileID: 0}
---- !u!212 &21248842
+  m_type: 0
+--- !u!114 &11454808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c880e2273b7fa240ba421e1b9ecefe4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: .5
+  start: {x: 30, y: 30}
+  middle: {x: 128, y: 200}
+  end: {x: 226, y: 30}
+  arcs: 3
+  variance: 30
+--- !u!212 &21208562
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 147052}
+  m_GameObject: {fileID: 172628}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -67,7 +83,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300012, guid: 7ec0e1248e4782546845571e8fdeec61, type: 3}
+  m_Sprite: {fileID: 21300008, guid: 7ec0e1248e4782546845571e8fdeec61, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -78,5 +94,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 147052}
+  m_RootGameObject: {fileID: 172628}
   m_IsPrefabParent: 1

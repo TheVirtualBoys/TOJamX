@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public enum Characters
 {
-	ONE,
-	TWO,
-	THREE,
-	FOUR,
-	FIVE,
-	SIX,
-	SEVEN,
-	EIGHT,
-	NINE,
-	MAX
+	Construction,
+	Caveman,
+	Rocker,
+	Paper1,
+	Origami,
+	Librarian,
+	Barber,
+	Crabapple,
+	Seamstress,
+	Max
 }
 
 public class Main : MonoBehaviour
@@ -21,8 +22,8 @@ public class Main : MonoBehaviour
 	static GameObject originalInstance = null;
 
 	//fun datas of funtimes
-	public static short numPlayers = 2;
-	//public Player players[];
+	public static short numPlayers     = 2;
+	static List<Player> childPlayers   = new List<Player>();
 
 	void Start()
 	{
@@ -37,6 +38,7 @@ public class Main : MonoBehaviour
 		{
 			Destroy( this.gameObject );
 		}
+		gameObject.GetComponentsInChildren<Player>(true, childPlayers);
 	}
 	
 	// Update is called once per frame
@@ -44,5 +46,15 @@ public class Main : MonoBehaviour
 	{
 		float dt = Time.deltaTime;
 		Utils.Update(dt);
+	}
+
+	public static void SetPlayerCharacter(PlayerIndex player, Characters character)
+	{
+		for (int i = 0;i < childPlayers.Count; ++i)
+		{
+			if (childPlayers[i].playerIndex == player) {
+				childPlayers[i].playerClass = character;
+			}
+		}
 	}
 }
