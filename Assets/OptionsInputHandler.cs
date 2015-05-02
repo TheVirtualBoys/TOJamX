@@ -23,8 +23,8 @@ public class OptionsInputHandler : MonoBehaviour
 		//just setup the grid once (this script runs char picker)
 		if ( grid == null )
 		{
-			grid = new GameObject[(int)Characters.Max];
-			for (int i = 0; i < (int)Characters.Max; ++i)
+			grid = new GameObject[(int)CharacterFactory.Characters.Max];
+			for (int i = 0; i < (int)CharacterFactory.Characters.Max; ++i)
 			{
 				// populate the grid with Char0, Char1... for positioning
 				grid[i] = GameObject.Find("Char" + i);
@@ -56,7 +56,7 @@ public class OptionsInputHandler : MonoBehaviour
 
 	void SetPlayerSprite(byte index)
 	{
-		if (index >= 0 && index < (int)Characters.Max)
+		if (index >= 0 && index < (int)CharacterFactory.Characters.Max)
 		{
 			fullPlayer.sprite = grid[(int)index].transform.GetChild (0).GetComponent<SpriteRenderer>().sprite;
 			return;
@@ -69,7 +69,7 @@ public class OptionsInputHandler : MonoBehaviour
 		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!
 		{
 			// select the highlighted player.
-			Main.SetPlayerCharacter(playerID, (Characters)selection);
+			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
 			return;
 		}
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)

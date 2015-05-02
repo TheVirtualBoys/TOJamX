@@ -5,13 +5,13 @@ using System.Collections;
 
 public class Player : GameplayInputHandler
 {
-	public Characters playerClass = Characters.Max;
+	public CharacterFactory.Characters playerClass = CharacterFactory.Characters.Max;
 	public Player m_targetPlayer = null;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-		playerClass = Characters.Max;
+		playerClass = CharacterFactory.Characters.Max;
 	}
 	
 	// Update is called once per frame
@@ -38,15 +38,4 @@ public class Player : GameplayInputHandler
 		thing.transform.parent = transform;
 	}
 
-/*	//HACKJEFFGIFFEN dummy projectile spawns
-	void SpawnPrefab(RPS which)
-	{
-		GameObject prefab;
-		switch( which.m_type )
-		{
-		case RPS.Type.Rock: 
-		GameObject clone = (GameObject)Instantiate( spritePrefab );
-		clone.transform.parent = transform;
-	}
-	*/
 }

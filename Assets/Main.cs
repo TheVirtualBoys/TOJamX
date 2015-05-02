@@ -2,20 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum Characters
-{
-	Construction,
-	Caveman,
-	Rocker,
-	Paper1,
-	Origami,
-	Librarian,
-	Barber,
-	Crabapple,
-	Seamstress,
-	Max
-}
-
 public class Main : MonoBehaviour
 {
 	//singleton
@@ -48,13 +34,8 @@ public class Main : MonoBehaviour
 		Utils.Update(dt);
 	}
 
-	public static void SetPlayerCharacter(PlayerIndex player, Characters character)
+	public static void SetPlayerCharacter(PlayerIndex player, CharacterFactory.Characters character)
 	{
-		for (int i = 0;i < childPlayers.Count; ++i)
-		{
-			if (childPlayers[i].playerIndex == player) {
-				childPlayers[i].playerClass = character;
-			}
-		}
+		//TODOJEFFGIFFENchildPlayers[(int)player].SetCharacter( character );
 	}
 }
