@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class MovementHandler : MonoBehaviour 
+public class GameplayInputHandler : MonoBehaviour 
 {
 	// public so you can select what player this script is attached to.
 	public PlayerIndex playerIndex = PlayerIndex.One;
@@ -29,17 +29,17 @@ public class MovementHandler : MonoBehaviour
 		}
 	}
 
-	void ThrowRock()
+	public virtual void ThrowRock()
 	{
 		Debug.Log ("Threw a rock");
 	}
 
-	void ThrowPaper()
+	public virtual void ThrowPaper()
 	{
 		Debug.Log ("Threw a Paper");
 	}
 
-	void ThrowScissors()
+	public virtual void ThrowScissors()
 	{
 		Debug.Log ("Threw a Scissors");
 	}
