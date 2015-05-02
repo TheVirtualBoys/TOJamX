@@ -18,6 +18,8 @@ public static class Utils
 	public delegate T ResultEvent<out T>();
 	private static List<Timer> timers = new List<Timer>();
 
+	public const short JOYSTICK_BUTTON_OFFSET = 20;
+
 	public static void Update(float dt)
 	{
 		for (int i = 0; i < timers.Count; ++i)

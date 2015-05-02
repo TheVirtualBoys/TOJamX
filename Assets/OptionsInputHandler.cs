@@ -4,17 +4,27 @@ using System.Collections;
 public class OptionsInputHandler : MonoBehaviour
 {
 	public PlayerIndex playerID = PlayerIndex.Max;
+	float lastInputTime         = 0.0f;
+	float repeatTime            = 0.3f;
+	public Sprite[] charSprites;
 	GameObject[] grid;
-	float lastInputTime = 0.0f;
-	float repeatTime = 0.3f;
+	SpriteRenderer fullPlayer;
 	byte selection;
 
 	void Start()
 	{
-		if (Main.numPlayers < (int)playerID + 1) Destroy(this);
-		grid = new GameObject[9];
-		for (int i = 0; i < 9; ++i)
+		if (Main.numPlayers < (int)playerID + 1)
 		{
+			Destroy(GameObject.Find("ActiveChar" + playerID));
+			Destroy(this);
+			return;
+		}
+		fullPlayer = GameObject.Find("ActiveChar" + playerID).GetComponent<SpriteRenderer>();
+		charSprites = Resources.LoadAll<Sprite>("character_portraits");
+		grid = new GameObject[(int)Characters.MAX];
+		for (int i = 0; i < (int)Characters.MAX; ++i)
+		{
+			// populate the grid with Char0, Char1... for positioning
 			grid[i] = GameObject.Find("Char" + i);
 		}
 
@@ -34,11 +44,22 @@ public class OptionsInputHandler : MonoBehaviour
 			break;
 		}
 		gameObject.transform.position = grid[selection].transform.position;
-		lastInputTime = Time.timeSinceLevelLoad;
+		SetPlayerSprite(selection);
+	}
+
+	void SetPlayerSprite(byte index)
+	{
+		if (index >= 0 && index < (int)Characters.MAX)
+		{
+			fullPlayer.sprite = charSprites[index];
+			return;
+		}
+		Debug.LogWarning("Tried setting index out of bounds");
 	}
 
 	void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Joystick1Button0))
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)
 		{
 			return;
@@ -47,7 +68,7 @@ public class OptionsInputHandler : MonoBehaviour
 		float y            = Input.GetAxisRaw("Vert" + playerID);
 		byte lastSelection = selection;
 
-		Debug.Log(playerID + " " + x + "," + y);
+		#region gross
 		if (x > 0.3f)
 		{
 			// joystick right
@@ -184,12 +205,13 @@ public class OptionsInputHandler : MonoBehaviour
 				break;
 			}
 		}
-
+		#endregion // gross
 		if (lastSelection != selection)
 		{
 			// play a sound and update graphics
-			gameObject.transform.position = grid[selection].transform.position;
 			lastInputTime = Time.timeSinceLevelLoad;
+			gameObject.transform.position = grid[selection].transform.position;
+			SetPlayerSprite(selection);
 		}
 	}
 }

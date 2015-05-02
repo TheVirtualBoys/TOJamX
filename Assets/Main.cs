@@ -1,6 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum Characters
+{
+	ONE,
+	TWO,
+	THREE,
+	FOUR,
+	FIVE,
+	SIX,
+	SEVEN,
+	EIGHT,
+	NINE,
+	MAX
+}
+
 public class Main : MonoBehaviour
 {
 	//singleton
