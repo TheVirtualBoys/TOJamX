@@ -3,15 +3,17 @@ using System.Collections;
 
 
 
-public class Player : GameplayInputHandler {
-
-
-
+public class Player : GameplayInputHandler
+{
+	public Characters playerClass { get; set; }
 	public Player m_targetPlayer = null;
+	public PlayerIndex playerIndex { public get; private set; }
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
+		playerClass = Characters.Max;
+		playerIndex = PlayerIndex.Max;
 	}
 	
 	// Update is called once per frame
