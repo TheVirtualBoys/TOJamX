@@ -145,6 +145,7 @@ public class Player : GameplayInputHandler
 		Debug.Log ( counts );
 
 		//healthbar
+		if (m_healthBar)
 		{
 			float fullScale = 101.0f * (float)m_health / (float)m_maxHealth;
 			Vector3 scale = m_healthBar.transform.localScale;
@@ -154,6 +155,7 @@ public class Player : GameplayInputHandler
 		}
 
 		//powerbar
+		if (m_powerBar)
 		{
 			Vector3 scale = m_powerBar.transform.localScale;
 			scale.y = Mathf.Max(1, 200.0f * (float)m_queuedThrows.Count / (float)Main.QUEUED_THROW_COUNT );

@@ -3,6 +3,8 @@ using System.Collections;
 
 public class ClearGameData : MonoBehaviour {
 
+	public bool IsResultScreen = false;
+
 	// Use this for initialization
 	void OnDestroy () 
 	{
@@ -20,4 +22,12 @@ public class ClearGameData : MonoBehaviour {
 		}
 	}
 
+	void OnStart()
+	{
+		if (IsResultScreen)
+		{
+			GameObject.Find ("Player0").transform.position = GameObject.Find("Player0Anchor").transform.position;
+			GameObject.Find ("Player1").transform.position = GameObject.Find("Player1Anchor").transform.position;
+		}
+	}
 }

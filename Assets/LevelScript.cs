@@ -52,7 +52,7 @@ public class LevelScript : MonoBehaviour {
 				readyForFlush = false;
 			}
 
-			if (false)
+			if (true)
 			{
 				int rand = Random.Range(0, 3);
 
