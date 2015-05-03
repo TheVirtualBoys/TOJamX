@@ -14,10 +14,13 @@ public class Player : GameplayInputHandler
 	private List<GameObject> m_cancels;
 	public Player m_targetPlayer = null;
 
+	private List<RPSFactory.Type> m_queuedThrows = new List<RPSFactory.Type>();
+
 	public int m_health;
 	private bool m_startedDeathEnd;
 
 	public Text m_healthText;
+	public Text m_queueText;
 
 	// Use this for initialization
 	public override void Start () {
@@ -53,18 +56,24 @@ public class Player : GameplayInputHandler
 		return m_health <= 0;
 	}
 
+	public bool ReadyToFlush()
+	{
+		return Main.QUEUED_THROW_COUNT == m_queuedThrows.Count;
+	}
+
+	public void FlushThrows()
+	{
+		foreach(var thing in m_queuedThrows)
+		{
+			createProjectile(thing);
+		}
+
+		m_queuedThrows.Clear();
+	}
+
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
-
-		if (m_healthText == null)
-		{
-			string handle = "Player" + playerIndex.ToString() + "Health";
-			if (GameObject.Find(handle) != null)
-			{
-				m_healthText = GameObject.Find(handle).GetComponent<Text>();
-			}
-		}
 
 		//HACKJEFFGIFFEN //should be dynamic on stick direction per frame
 		int targetIndex = 1 - (int)playerIndex; //binary invert :-D
@@ -126,6 +135,11 @@ public class Player : GameplayInputHandler
 		if (m_healthText != null)
 		{
 			m_healthText.text = m_health.ToString();
+		}
+
+		if (m_queueText != null)
+		{
+			m_queueText.text = (Main.QUEUED_THROW_COUNT - m_queuedThrows.Count).ToString(); 
 		}
 
 
@@ -227,7 +241,10 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			createProjectile( RPSFactory.Type.Rock );
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			{
+				m_queuedThrows.Add( RPSFactory.Type.Rock );
+			}
 		}
 	}
 	
@@ -235,7 +252,10 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			createProjectile( RPSFactory.Type.Paper );
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			{
+				m_queuedThrows.Add( RPSFactory.Type.Paper );
+			}
 		}
 	}
 	
@@ -243,7 +263,10 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			createProjectile( RPSFactory.Type.Scissors );
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			{
+				m_queuedThrows.Add( RPSFactory.Type.Scissors );
+			}
 		}
 	}
 
