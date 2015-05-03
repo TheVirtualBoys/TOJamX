@@ -74,34 +74,42 @@ public class Player : GameplayInputHandler
 
 		string counts = "throws-";
 		//eliminate those who are ready
-		while( m_throws.Count > 0 && m_throws[0].GetComponent<ProjectileHandler>().m_seppuku )
+		for ( int i = 0; i < m_throws.Count; i++ )
 		{
-			ProjectileHandler myPH = m_throws[0].GetComponent<ProjectileHandler>();
-
-			if (Mathf.Approximately(myPH.m_currentT, 1.0f))
+			GameObject go = m_throws[i];
+			ProjectileHandler goPH = go.GetComponent<ProjectileHandler>();
+			if ( goPH.m_seppuku )
 			{
-				AudioHandler.PlaySoundEffect("Hurt" + Random.Range(1, 3)); // second number is exclusive...
+				if (Mathf.Approximately(goPH.m_currentT, 1.0f))
+				{
+					AudioHandler.PlaySoundEffect("Hurt" + Random.Range(1, 3)); // second number is exclusive...
 
-				m_targetPlayer.DoDamage();
-			}
-			else
-			{
-				AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
+					m_targetPlayer.DoDamage();
+				}
+				else
+				{
+					AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
+				}
+
+				returnArcIndex( goPH.m_arc );
+				Destroy ( go );
+				m_throws.RemoveAt( i );
 			}
 
-			returnArcIndex( myPH.m_arc );
-			Destroy ( m_throws[0] );
-			m_throws.RemoveAt( 0 );
 		}
 		counts += m_throws.Count;
 
 		counts += " -cancels-";
 		//eliminate those who are ready
-		while( m_cancels.Count > 0 && m_cancels[0].GetComponent<ProjectileHandler>().m_seppuku )
+		for ( int i = 0; i < m_cancels.Count; i++ )
 		{
-			returnArcIndex( m_cancels[0].GetComponent<ProjectileHandler>().m_arc );
-			Destroy ( m_cancels[0] );
-			m_cancels.RemoveAt( 0 );
+			GameObject go = m_cancels[i];
+			ProjectileHandler goPH = go.GetComponent<ProjectileHandler>();
+			if ( goPH.m_seppuku )
+			{
+				returnArcIndex( goPH.m_arc );
+				m_cancels.RemoveAt( i );
+			}
 		}
 		counts += m_cancels.Count;
 
