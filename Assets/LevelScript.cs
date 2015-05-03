@@ -24,6 +24,7 @@ public class LevelScript : MonoBehaviour {
 
 			p.m_healthBar = GameObject.Find ("HealthBar" + (int)p.playerIndex);
 			p.m_powerBar = GameObject.Find ( "PowerBar" + (int)p.playerIndex);
+			p.m_explosion = GameObject.Find ( "Power_Splosion" + (int)p.playerIndex);
 		}
 
 //		m_elapsedSinceSpawn = 0;

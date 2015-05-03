@@ -23,6 +23,7 @@ public class Player : GameplayInputHandler
 
 	public GameObject m_healthBar;
 	public GameObject m_powerBar;
+	public GameObject m_explosion;
 
 	// Use this for initialization
 	public override void Start () {
@@ -163,6 +164,10 @@ public class Player : GameplayInputHandler
 			m_powerBar.transform.localScale = scale;
 		}
 
+		//splosion
+		{
+			m_explosion.GetComponent<Splosion>().enabled = m_queuedThrows.Count > 0;
+		}
 	
 		if (!m_startedDeathEnd && IsDead())
 		{
