@@ -1067,3 +1067,4 @@ MonoBehaviour:
   clipToPlay: {fileID: 8300000, guid: 3105e89c02151844ea468c2eaacfd915, type: 3}
   fadeInSeconds: 0
   fadeOutSeconds: 0
+  loopMusic: 1

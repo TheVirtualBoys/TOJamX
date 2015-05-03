@@ -26,6 +26,7 @@ public class Player : GameplayInputHandler
 	public GameObject m_healthBar;
 	public GameObject m_powerBar;
 	public GameObject m_explosion;
+	public GameObject m_projPopPrefab;
 
 	public List<CharacterFactory.CharacterAnim> animEnums = new List<CharacterFactory.CharacterAnim>();
 	public List<float> animDurs = new List<float>();
@@ -129,6 +130,10 @@ public class Player : GameplayInputHandler
 					AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
 				}
 
+				GameObject pop =  Instantiate(RPSFactory.GetInst().exploPrefab);
+				pop.transform.parent = this.transform;
+				pop.transform.position = go.transform.position;
+
 				returnArcIndex( goPH.m_arc );
 				Destroy ( go );
 				m_throws.RemoveAt( i );
@@ -155,6 +160,10 @@ public class Player : GameplayInputHandler
 				{
 					AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
 				}
+
+				GameObject pop =  Instantiate(RPSFactory.GetInst().exploPrefab);
+				pop.transform.parent = this.transform;
+				pop.transform.position = go.transform.position;
 
 				returnArcIndex( goPH.m_arc );
 				Destroy ( go );

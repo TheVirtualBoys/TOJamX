@@ -9,6 +9,7 @@ public class RPSFactory : MonoBehaviour {
 	public GameObject rockPrefab;
 	public GameObject paperPrefab;
 	public GameObject scissorsPrefab;
+	public GameObject exploPrefab;
 	public enum Type
 	{
 		Rock,

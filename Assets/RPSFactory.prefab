@@ -42,6 +42,7 @@ MonoBehaviour:
   rockPrefab: {fileID: 172628, guid: 7ab1fca047b4db84184ae151121c1cf0, type: 2}
   paperPrefab: {fileID: 149386, guid: 6c03679e8a370f7448788f6a965dc31c, type: 2}
   scissorsPrefab: {fileID: 177718, guid: e08195ebe677f1d46963ca7a6611bb50, type: 2}
+  exploPrefab: {fileID: 177910, guid: 40186b2e45883954abf98b25a871f6f7, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
