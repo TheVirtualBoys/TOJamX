@@ -83,7 +83,7 @@ public class OptionsInputHandler : MonoBehaviour
 			Main.numConfirmed++;
 			this.enabled = false;
 
-			AudioHandler.PlaySoundEffect("Select" + Random.Range(2, 3));
+			AudioHandler.PlaySoundEffect("Select" + Random.Range(2, 4)); // second number is exclusive
 
 			return;
 		}
