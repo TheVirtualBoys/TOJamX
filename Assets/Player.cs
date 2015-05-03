@@ -164,7 +164,9 @@ public class Player : GameplayInputHandler
 			m_powerBar.transform.localScale = scale;
 		}
 
+
 		//splosion
+		if (m_explosion)
 		{
 			m_explosion.GetComponent<Splosion>().enabled = m_queuedThrows.Count > 0;
 		}
