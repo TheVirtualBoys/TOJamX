@@ -15,7 +15,7 @@ public static class Utils
 {
 	public delegate void EmptyCallback();
 	public delegate void CallbackEvent<T>(T value);
-	public delegate T ResultEvent<out T>();
+	public delegate T ResultEvent<T>();
 	private static List<Timer> timers = new List<Timer>();
 
 	public const short JOYSTICK_BUTTON_OFFSET = 20;
