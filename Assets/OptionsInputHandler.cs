@@ -22,7 +22,7 @@ public class OptionsInputHandler : MonoBehaviour
 
 		player = Main.GetPlayer((int)playerID); //ensures exists etc
 
-		Transform parentTransform = GameObject.Find("ActiveChar" + playerID).transform;
+		Transform parentTransform = GameObject.Find("GlobalRoot").transform;
 		player.transform.parent = parentTransform;
 		player.transform.position = parentTransform.position;
 
