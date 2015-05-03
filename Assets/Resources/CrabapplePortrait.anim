@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: CavemanIdle
+  m_Name: CrabapplePortrait
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,9 +18,9 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: a7fc82d5413fe994fbd663962f1f977d, type: 3}
+      value: {fileID: 21300014, guid: 8d0265dd97748f34ca5c19939086a72a, type: 3}
     - time: .0833333358
-      value: {fileID: 21300010, guid: a7fc82d5413fe994fbd663962f1f977d, type: 3}
+      value: {fileID: 21300032, guid: 8d0265dd97748f34ca5c19939086a72a, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -39,8 +39,8 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: a7fc82d5413fe994fbd663962f1f977d, type: 3}
-    - {fileID: 21300010, guid: a7fc82d5413fe994fbd663962f1f977d, type: 3}
+    - {fileID: 21300014, guid: 8d0265dd97748f34ca5c19939086a72a, type: 3}
+    - {fileID: 21300032, guid: 8d0265dd97748f34ca5c19939086a72a, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
