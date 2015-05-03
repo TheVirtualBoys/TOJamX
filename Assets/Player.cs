@@ -162,6 +162,7 @@ public class Player : GameplayInputHandler
 			Vector3 scale = m_powerBar.transform.localScale;
 			scale.y = Mathf.Max(1, 200.0f * (float)m_queuedThrows.Count / (float)Main.QUEUED_THROW_COUNT );
 			m_powerBar.transform.localScale = scale;
+			SetAnimState(CharacterFactory.CharacterAnim.Powerup);
 		}
 
 
