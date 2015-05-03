@@ -58,7 +58,7 @@ public class Player : GameplayInputHandler
 
 	public bool ReadyToFlush()
 	{
-		return Main.QUEUED_THROW_COUNT == m_queuedThrows.Count;
+		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0);
 	}
 
 	public void FlushThrows()
@@ -116,6 +116,17 @@ public class Player : GameplayInputHandler
 			ProjectileHandler goPH = go.GetComponent<ProjectileHandler>();
 			if ( goPH.m_seppuku )
 			{
+				if (Mathf.Approximately(goPH.m_currentT, 1.0f))
+				{
+					AudioHandler.PlaySoundEffect("Hurt" + Random.Range(1, 3)); // second number is exclusive...
+					
+					m_targetPlayer.DoDamage();
+				}
+				else
+				{
+					AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
+				}
+
 				returnArcIndex( goPH.m_arc );
 				Destroy ( go );
 				m_cancels.RemoveAt( i );
