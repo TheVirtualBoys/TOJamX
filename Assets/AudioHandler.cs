@@ -18,6 +18,9 @@ public class AudioHandler : MonoBehaviour {
 	public AudioClip[] musicClips;
 	public AudioClip[] sfxClips;
 
+
+	const bool disableAudio = false;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -135,6 +138,9 @@ public class AudioHandler : MonoBehaviour {
 	
 	public static void PlayMusic(AudioClip audio, float fadeInTimeSeconds, float fadeOutTimeSeconds)
 	{
+		if (disableAudio)
+			return;
+
 		s_nextMusicToPlay = audio;
 		s_fadeInTimeSeconds = fadeInTimeSeconds;
 		s_fadeOutTimeSeconds = fadeOutTimeSeconds;
@@ -163,6 +169,9 @@ public class AudioHandler : MonoBehaviour {
 	
 	public static void PlaySoundEffect(AudioClip audio, float volume)
 	{
+		if (disableAudio)
+			return;
+
 		AudioSource source = s_sfxEmitterObject.GetComponent<AudioSource>();
 		source.clip = audio; 
 		source.loop = false;

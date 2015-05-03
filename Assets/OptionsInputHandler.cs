@@ -78,12 +78,13 @@ public class OptionsInputHandler : MonoBehaviour
 
 		if ((playerID == PlayerIndex.One && Input.GetKeyDown(KeyCode.Z)) || (playerID == PlayerIndex.Two && Input.GetKeyDown(KeyCode.X)) || Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Dear god the casts!
 		{
-		//if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!
-			// select the highlighted player.
 			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
 			gameObject.GetComponent<FlashOnSelect>().stopFlashing = true;
 			Main.numConfirmed++;
 			this.enabled = false;
+
+			AudioHandler.PlaySoundEffect("Select" + Random.Range(2, 4)); // second number is exclusive
+
 			return;
 		}
 		if ((lastInputTime + repeatTime) > Time.timeSinceLevelLoad)

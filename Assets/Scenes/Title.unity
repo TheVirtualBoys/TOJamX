@@ -243,6 +243,52 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 482684980}
+--- !u!1001 &849238527
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1021161896}
+    m_Modifications:
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+  m_IsPrefabParent: 0
+--- !u!4 &849238528 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 431814, guid: fb86ce4f02647c14d9661411526a00e8, type: 2}
+  m_PrefabInternal: {fileID: 849238527}
 --- !u!1 &943399315
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +379,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 849238528}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &1591811457
@@ -370,6 +417,7 @@ MonoBehaviour:
   - joystick 3 button 0
   - joystick 4 button 0
   levelToLoad: GameOptions
+  sound: {fileID: 8300000, guid: 725e4f68cf50f9042b86c3be78e90eae, type: 3}
 --- !u!4 &1591811459
 Transform:
   m_ObjectHideFlags: 0
