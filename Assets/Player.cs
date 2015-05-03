@@ -17,15 +17,18 @@ public class Player : GameplayInputHandler
 	private List<RPSFactory.Type> m_queuedThrows = new List<RPSFactory.Type>();
 
 	public int m_health;
+	public const int m_maxHealth = 20;
 	private bool m_startedDeathEnd;
 
 	public Text m_healthText;
 	public Text m_queueText;
+	public GameObject m_healthBar;
+	public GameObject m_powerBar;
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
-		m_health = 20;
+		m_health = m_maxHealth;
 		m_startedDeathEnd = false;
 		SetCharacter( playerClass );
 		if ( sm_arcIndices.Count == 0 ) { for( int i = 0; i < sm_arcs; i++ ) { sm_arcIndices.Add ( i ); } }
@@ -146,6 +149,22 @@ public class Player : GameplayInputHandler
 		if (m_healthText != null)
 		{
 			m_healthText.text = m_health.ToString();
+		}
+
+		//healthbar
+		{
+			float fullScale = 101.0f * (float)m_health / (float)m_maxHealth;
+			Vector3 scale = m_healthBar.transform.localScale;
+			if ( scale.x > 0 ) { scale.x = fullScale; }
+			else { scale.x = -fullScale; }
+			m_healthBar.transform.localScale = scale;
+		}
+
+		//powerbar
+		{
+			Vector3 scale = m_powerBar.transform.localScale;
+			scale.y = Mathf.Max(1, 200.0f * (float)m_queuedThrows.Count / (float)Main.QUEUED_THROW_COUNT );
+			m_powerBar.transform.localScale = scale;
 		}
 
 		if (m_queueText != null)

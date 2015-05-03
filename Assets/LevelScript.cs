@@ -6,6 +6,8 @@ public class LevelScript : MonoBehaviour {
 
 //	private float m_elapsedSinceSpawn;
 
+	bool m_swappingLevels = false;
+
 	// Use this for initialization
 	void Start () {
 
@@ -17,14 +19,25 @@ public class LevelScript : MonoBehaviour {
 			p.InputEnabled( true );
 			//anchor them to level spots
 			Transform anchor = GameObject.Find ("PlayerAnchor" + i).transform;
-			p.gameObject.transform.parent = anchor;
+			//p.gameObject.transform.parent = anchor;
 			p.gameObject.transform.position = anchor.position;
 
 			p.m_healthText = GameObject.Find("Player" + p.playerIndex.ToString() + "Health").GetComponent<Text>();
 			p.m_queueText = GameObject.Find ("Player" + p.playerIndex.ToString() + "Queue").GetComponent<Text>();
+			p.m_healthBar = GameObject.Find ("HealthBar" + (int)p.playerIndex);
+			p.m_powerBar = GameObject.Find ( "PowerBar" + (int)p.playerIndex);
 		}
 
 //		m_elapsedSinceSpawn = 0;
+	}
+
+	public void ChangeToResults()
+	{
+		if (!m_swappingLevels)
+		{
+			m_swappingLevels = true;
+			Application.LoadLevel("Results");
+		}
 	}
 	
 	// Update is called once per frame
