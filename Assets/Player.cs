@@ -21,13 +21,22 @@ public class Player : GameplayInputHandler
 	public const int m_maxHealth = 20;
 	private bool m_startedDeathEnd;
 
+	private bool m_isFlushing = false;
+
 	public GameObject m_healthBar;
 	public GameObject m_powerBar;
 	public GameObject m_explosion;
 
+	public List<CharacterFactory.CharacterAnim> animEnums = new List<CharacterFactory.CharacterAnim>();
+	public List<float> animDurs = new List<float>();
+	public bool m_animStackDirty = false;
+
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
+
+		QueueAnim( CharacterFactory.CharacterAnim.Idle, 999999999 );
+
 		m_health = m_maxHealth;
 		m_startedDeathEnd = false;
 		SetCharacter( playerClass );
@@ -51,6 +60,7 @@ public class Player : GameplayInputHandler
 		if (m_health > 0)
 		{
 			m_health -= 1;
+			QueueAnim( CharacterFactory.CharacterAnim.Powerup, 0.3f ); //lol 1 frame
 		}
 	}
 
@@ -61,17 +71,33 @@ public class Player : GameplayInputHandler
 
 	public bool ReadyToFlush()
 	{
-		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0);
+		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0 && !m_isFlushing);
 	}
 
 	public void FlushThrows()
 	{
+		m_isFlushing = true;
+
+		int i = 0;
 		foreach(var thing in m_queuedThrows)
 		{
-			createProjectile(thing);
+			Utils.AddTimer(0.05f*i + Random.Range(0.0f, 0.1f), ThrowProjectile);
+				i++;
 		}
+	}
 
-		m_queuedThrows.Clear();
+	public void ThrowProjectile()
+	{
+		if (m_queuedThrows.Count > 1)
+		{
+			createProjectile(m_queuedThrows[0]);
+			m_queuedThrows.RemoveAt(0);
+		}
+		else
+		{
+			m_queuedThrows.Clear();
+			m_isFlushing = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -162,7 +188,6 @@ public class Player : GameplayInputHandler
 			Vector3 scale = m_powerBar.transform.localScale;
 			scale.y = Mathf.Max(1, 200.0f * (float)m_queuedThrows.Count / (float)Main.QUEUED_THROW_COUNT );
 			m_powerBar.transform.localScale = scale;
-			SetAnimState(CharacterFactory.CharacterAnim.Powerup);
 		}
 
 
@@ -171,17 +196,45 @@ public class Player : GameplayInputHandler
 		{
 			m_explosion.GetComponent<Splosion>().enabled = m_queuedThrows.Count > 0;
 		}
+
+		if ( m_queuedThrows.Count > 0 )
+		{
+			QueueAnim( CharacterFactory.CharacterAnim.Powerup, 0.17f ); //lol 1 frame
+		}
 	
 		if (!m_startedDeathEnd && IsDead())
 		{
 			m_startedDeathEnd = true;
 			Utils.AddTimer(5.0f, OnDeathComplete);
 		}
+
+		if ( m_animStackDirty )
+		{
+			SetAnimState ( animEnums[ animEnums.Count - 1 ] );
+		}
+		else
+		{
+			animDurs[ animDurs.Count - 1 ] -= Time.deltaTime;
+			if ( animDurs[ animDurs.Count - 1 ] <= 0.0f )
+			{
+				animDurs.RemoveAt( animDurs.Count - 1 );
+				animEnums.RemoveAt ( animEnums.Count - 1 );
+				SetAnimState ( animEnums[ animEnums.Count - 1 ] );
+			}
+		}
 	}
 
-	public void SetAnimState(CharacterFactory.CharacterAnim anim)
+	public void QueueAnim( CharacterFactory.CharacterAnim anim, float duration )
+	{
+		animEnums.Add ( anim );
+		animDurs.Add ( duration );
+		m_animStackDirty = true;
+	}
+
+	private void SetAnimState(CharacterFactory.CharacterAnim anim)
 	{
 		m_animator.SetInteger("state", (int)anim);
+		m_animStackDirty = false;
 	}
 
 	public void OnDeathComplete()
@@ -276,7 +329,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Rock );
 			}
@@ -287,7 +340,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Paper );
 			}
@@ -298,7 +351,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Scissors );
 			}
