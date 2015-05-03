@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.UI;
 
 
 public class Player : GameplayInputHandler
@@ -17,6 +17,7 @@ public class Player : GameplayInputHandler
 	public int m_health;
 	private bool m_startedDeathEnd;
 
+	public Text m_healthText;
 
 	// Use this for initialization
 	public override void Start () {
@@ -41,7 +42,10 @@ public class Player : GameplayInputHandler
 
 	public void DoDamage()
 	{
-		m_health -= 1;
+		if (m_health > 0)
+		{
+			m_health -= 1;
+		}
 	}
 
 	public bool IsDead()
@@ -52,6 +56,15 @@ public class Player : GameplayInputHandler
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
+
+		if (m_healthText == null)
+		{
+			string handle = "Player" + playerIndex.ToString() + "Health";
+			if (GameObject.Find(handle) != null)
+			{
+				m_healthText = GameObject.Find(handle).GetComponent<Text>();
+			}
+		}
 
 		//HACKJEFFGIFFEN //should be dynamic on stick direction per frame
 		int targetIndex = 1 - (int)playerIndex; //binary invert :-D
@@ -100,6 +113,12 @@ public class Player : GameplayInputHandler
 		}
 
 		Debug.Log ( counts );
+
+		if (m_healthText != null)
+		{
+			m_healthText.text = m_health.ToString();
+		}
+
 
 		if (!m_startedDeathEnd && IsDead())
 		{
@@ -197,7 +216,7 @@ public class Player : GameplayInputHandler
 
 	public override void ThrowRock()
 	{
-		if (!IsDead())
+		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
 			createProjectile( RPSFactory.Type.Rock );
 		}
@@ -205,7 +224,7 @@ public class Player : GameplayInputHandler
 	
 	public override void ThrowPaper()
 	{
-		if (!IsDead())
+		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
 			createProjectile( RPSFactory.Type.Paper );
 		}
@@ -213,7 +232,7 @@ public class Player : GameplayInputHandler
 	
 	public override void ThrowScissors()
 	{
-		if (!IsDead())
+		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
 			createProjectile( RPSFactory.Type.Scissors );
 		}
