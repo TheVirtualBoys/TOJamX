@@ -267,9 +267,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67cc00bb59437a5488bdd1dbd4fef986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clipToPlay: {fileID: 8300000, guid: da4118475af87114eb09a9007a8ea0b2, type: 3}
-  fadeInSeconds: 1
-  fadeOutSeconds: 1
+  clipToPlay: {fileID: 8300000, guid: 4f7399ba16408224489ee553e64d464e, type: 3}
+  fadeInSeconds: 1.5
+  fadeOutSeconds: 0
 --- !u!1 &2079908988
 GameObject:
   m_ObjectHideFlags: 0

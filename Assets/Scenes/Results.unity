@@ -343,6 +343,7 @@ GameObject:
   - 4: {fileID: 1591811459}
   - 114: {fileID: 1591811458}
   - 114: {fileID: 1591811460}
+  - 114: {fileID: 1591811461}
   m_Layer: 0
   m_Name: LevelRoot
   m_TagString: Untagged
@@ -398,6 +399,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsResultScreen: 1
+--- !u!114 &1591811461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1591811457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cc00bb59437a5488bdd1dbd4fef986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipToPlay: {fileID: 8300000, guid: b13af8e1903527046b5d2bcc692a364c, type: 3}
+  fadeInSeconds: .150000006
+  fadeOutSeconds: .150000006
 --- !u!1 &1880977176
 GameObject:
   m_ObjectHideFlags: 0
