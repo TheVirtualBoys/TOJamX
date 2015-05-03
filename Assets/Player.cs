@@ -7,8 +7,8 @@ using System.Collections.Generic;
 public class Player : GameplayInputHandler
 {
 	public CharacterFactory.Characters playerClass;
-	public const int arcs = 3;
-	private List<int> m_arcIndices;
+	public static int sm_arcs = 3;
+	private static List<int> sm_arcIndices = new List<int>();
 	private GameObject m_childPlayerPrefab = null;
 	private List<GameObject> m_throws;
 	private List<GameObject> m_cancels;
@@ -19,12 +19,21 @@ public class Player : GameplayInputHandler
 	public override void Start () {
 		base.Start();
 		SetCharacter( playerClass );
-		m_arcIndices = new List<int>();
-		for( int i = 0; i < arcs; i++ ) { m_arcIndices.Add ( i ); }
+		if ( sm_arcIndices.Count == 0 ) { for( int i = 0; i < sm_arcs; i++ ) { sm_arcIndices.Add ( i ); } }
 		m_throws = new List<GameObject>();
 		m_cancels = new List<GameObject>();
 	}
-	
+
+	static private void returnArcIndex( int index )
+	{
+		//return only if unique
+		for(int i = 0; i < sm_arcIndices.Count; i++ )
+		{
+			if ( sm_arcIndices[i] == index ) return;
+		}
+		sm_arcIndices.Add ( index );
+	}
+
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
@@ -39,7 +48,7 @@ public class Player : GameplayInputHandler
 		//eliminate those who are ready
 		while( m_throws.Count > 0 && m_throws[0].GetComponent<ProjectileHandler>().m_seppuku )
 		{
-			m_arcIndices.Add ( m_throws[0].GetComponent<ProjectileHandler>().m_arc );
+			returnArcIndex( m_throws[0].GetComponent<ProjectileHandler>().m_arc );
 			Destroy ( m_throws[0] );
 			m_throws.RemoveAt( 0 );
 		}
@@ -49,7 +58,7 @@ public class Player : GameplayInputHandler
 		//eliminate those who are ready
 		while( m_cancels.Count > 0 && m_cancels[0].GetComponent<ProjectileHandler>().m_seppuku )
 		{
-			m_arcIndices.Add ( m_cancels[0].GetComponent<ProjectileHandler>().m_arc );
+			returnArcIndex( m_cancels[0].GetComponent<ProjectileHandler>().m_arc );
 			Destroy ( m_cancels[0] );
 			m_cancels.RemoveAt( 0 );
 		}
@@ -110,7 +119,6 @@ public class Player : GameplayInputHandler
 			GameObject theirGO = m_targetPlayer.m_throws[0];
 			ProjectileHandler theirPH = theirGO.GetComponent<ProjectileHandler>();
 			whichArc = theirPH.m_arc;
-			m_arcIndices.RemoveAt( m_arcIndices.Find ( x => x == whichArc ));
 
 			RPSLogic theirRPS = theirGO.GetComponent<RPSLogic>();
 			if ( myRPS.beats( theirRPS ) )
@@ -131,10 +139,11 @@ public class Player : GameplayInputHandler
 		}
 		else
 		{
-			//when there's nothing to aim for, randomize arc
-			int arcIndex = Random.Range(0, m_arcIndices.Count);
-			whichArc = m_arcIndices[arcIndex];
-			m_arcIndices.RemoveAt( arcIndex );
+			//when there's nothing to aim for, fresh arcs
+			if ( sm_arcIndices.Count == 0 ) { sm_arcIndices.Add (sm_arcs++); } //let arc collections grow
+			int arcIndex = Random.Range(0, sm_arcIndices.Count);
+			whichArc = sm_arcIndices[arcIndex];
+			sm_arcIndices.RemoveAt( arcIndex );
 		}
 
 		//finally, configure visual path

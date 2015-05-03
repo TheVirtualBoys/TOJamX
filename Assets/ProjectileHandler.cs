@@ -28,7 +28,7 @@ public class ProjectileHandler : MonoBehaviour {
 		m_end = end;
 
 		m_arc = whichArc;
-		float variation = (float)whichArc / (float)(Player.arcs - 1); //variation needs to be 0-1 inclusive
+		float variation = (float)whichArc / (float)(Player.sm_arcs - 1); //variation needs to be 0-1 inclusive
 		
 		//find perpendicular to path
 		Vector2 line = end - start;
