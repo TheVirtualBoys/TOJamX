@@ -18,7 +18,7 @@ public class Player : GameplayInputHandler
 	private List<RPSFactory.Type> m_queuedThrows = new List<RPSFactory.Type>();
 
 	public int m_health;
-	public const int m_maxHealth = 20;
+	public const int m_maxHealth = 50;
 	private bool m_startedDeathEnd;
 
 	private bool m_isFlushing = false;
@@ -58,7 +58,17 @@ public class Player : GameplayInputHandler
 
 	public void DoDamage()
 	{
-		if (m_health > 0)
+		bool doit = true;
+
+		if (m_targetPlayer)
+		{
+			if (m_targetPlayer.IsDead())
+			{
+				doit = false;
+			}
+		}
+
+		if (m_health > 0 && doit)
 		{
 			m_health -= 1;
 			QueueAnim( CharacterFactory.CharacterAnim.Powerup, 0.3f ); //lol 1 frame
@@ -82,7 +92,7 @@ public class Player : GameplayInputHandler
 		int i = 0;
 		foreach(var thing in m_queuedThrows)
 		{
-			Utils.AddTimer(0.05f*i + Random.Range(0.0f, 0.1f), ThrowProjectile);
+			Utils.AddTimer(0.05f*i + Random.Range(0.0f, 0.35f), ThrowProjectile);
 				i++;
 		}
 	}
@@ -345,7 +355,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing && m_cancels.Count == 0 && m_throws.Count == 0)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Rock );
 			}
@@ -356,7 +366,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing&& m_cancels.Count == 0 && m_throws.Count == 0)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Paper );
 			}
@@ -367,7 +377,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing&& m_cancels.Count == 0 && m_throws.Count == 0)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Scissors );
 			}
