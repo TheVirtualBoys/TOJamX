@@ -9,6 +9,7 @@ public class Main : MonoBehaviour
 
 	//fun datas of funtimes
 	public static short numPlayers      = 2;
+	public static short numConfirmed = 0;
 	public const short MAX_PLAYERS      = 4;
 	public static Player[] childPlayers = new Player[Main.MAX_PLAYERS];
 
@@ -32,6 +33,12 @@ public class Main : MonoBehaviour
 	{
 		float dt = Time.deltaTime;
 		Utils.Update(dt);
+	}
+
+	public static void Reset()
+	{
+		numPlayers   = 2;
+		numConfirmed = 0;
 	}
 
 	public static void SetPlayerCharacter(PlayerIndex player, CharacterFactory.Characters character)

@@ -86,6 +86,7 @@ public class OptionsInputHandler : MonoBehaviour
 			// select the highlighted player.
 			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
 			gameObject.GetComponent<FlashOnSelect>().stopFlashing = true;
+			Main.numConfirmed++;
 			this.enabled = false;
 			return;
 		}
