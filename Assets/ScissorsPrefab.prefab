@@ -43,7 +43,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: .5
   middle: {x: 128, y: 200}
-  variance: 30
+  variance: 80
   m_currentT: 0
   m_endT: 1
   m_seppuku: 0
