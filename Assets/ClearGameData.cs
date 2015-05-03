@@ -22,7 +22,7 @@ public class ClearGameData : MonoBehaviour {
 		}
 	}
 
-	void OnStart()
+	void Start()
 	{
 		if (IsResultScreen)
 		{
