@@ -197,9 +197,16 @@ public class Player : GameplayInputHandler
 			m_explosion.GetComponent<Splosion>().enabled = m_queuedThrows.Count > 0;
 		}
 
-		if ( m_queuedThrows.Count > 0 )
+		if ( m_queuedThrows.Count > 0 && animDurs.Count < 2 )
 		{
-			QueueAnim( CharacterFactory.CharacterAnim.Powerup, 0.17f ); //lol 1 frame
+			if ( m_isFlushing )
+			{
+				QueueAnim( CharacterFactory.CharacterAnim.Attack, 0.17f ); //lol 1 frame
+			}
+			else
+			{
+				QueueAnim( CharacterFactory.CharacterAnim.Powerup, 0.17f ); //lol 1 frame
+			}
 		}
 	
 		if (!m_startedDeathEnd && IsDead())
