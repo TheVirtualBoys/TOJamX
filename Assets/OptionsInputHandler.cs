@@ -26,22 +26,26 @@ public class OptionsInputHandler : MonoBehaviour
 		player.transform.parent   = parentTransform;
 		player.transform.position = parentTransform.position;
 		Vector3 pos               = Vector3.zero;
+		Vector3 scale             = Vector3.one;
 		switch (playerID)
 		{
 			case PlayerIndex.One:
 				pos = new Vector3(Screen.width / 4, Screen.height / 18, 1.0f);
 			break;
 			case PlayerIndex.Two:
-				pos = new Vector3(Screen.width / 4 * 3, Screen.height / 18, 1.0f);
+				pos   = new Vector3(Screen.width / 4 * 3, Screen.height / 18, 1.0f);
+				scale = new Vector3(-1, 1, 1);
 			break;
 			case PlayerIndex.Three:
 				pos = new Vector3(Screen.width / 8 * 3, Screen.height / 10, 1.5f);
 			break;
 			case PlayerIndex.Four:
-				pos = new Vector3(Screen.width / 8 * 6, Screen.height / 10, 1.5f);
+				pos   = new Vector3(Screen.width / 8 * 6, Screen.height / 10, 1.5f);
+				scale = new Vector3(-1, 1, 1);
 			break;
 		}
 		player.transform.localPosition = pos;
+		player.transform.localScale = scale;
 
 		//just setup the grid once (this script runs char picker)
 		if ( grid == null )
@@ -54,6 +58,7 @@ public class OptionsInputHandler : MonoBehaviour
 				GameObject character = CharacterFactory.GetInst().Create( (CharacterFactory.Characters)i );
 				character.gameObject.transform.parent = grid[i].gameObject.transform;
 				character.gameObject.transform.position = grid[i].gameObject.transform.position;
+				character.GetComponent<Animator>().SetInteger("state", (int)CharacterFactory.CharacterAnim.Portrait);
 			}
 		}
 

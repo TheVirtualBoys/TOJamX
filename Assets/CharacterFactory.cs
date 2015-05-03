@@ -19,6 +19,16 @@ public class CharacterFactory : MonoBehaviour {
 		Max
 	};
 
+	public enum CharacterAnim
+	{
+		Idle,
+		Powerup,
+		Attack,
+		Hit,
+		Portrait,
+		Max
+	}
+
 	public GameObject[] characters = new GameObject[(int)Characters.Max];
 	
 	void Start()
