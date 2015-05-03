@@ -108,6 +108,7 @@ public class Player : GameplayInputHandler
 			if ( goPH.m_seppuku )
 			{
 				returnArcIndex( goPH.m_arc );
+				Destroy ( go );
 				m_cancels.RemoveAt( i );
 			}
 		}
