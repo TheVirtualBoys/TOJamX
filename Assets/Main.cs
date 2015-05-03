@@ -39,6 +39,11 @@ public class Main : MonoBehaviour
 	{
 		numPlayers   = 2;
 		numConfirmed = 0;
+
+		for (int i = 0; i < MAX_PLAYERS; ++i)
+		{
+			childPlayers[i] = null;
+		}
 	}
 
 	public static Player GetPlayer(int which)

@@ -6,7 +6,7 @@ public class OptionsInputHandler : MonoBehaviour
 	public PlayerIndex playerID = PlayerIndex.Max;
 	float lastInputTime         = 0.0f;
 	float repeatTime            = 0.3f;
-	static GameObject[] grid;
+	public static GameObject[] grid;
 	Player player;
 	byte selection;
 
