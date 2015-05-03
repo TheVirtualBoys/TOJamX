@@ -418,6 +418,7 @@ MonoBehaviour:
   - joystick 3 button 0
   - joystick 4 button 0
   levelToLoad: GameOptions
+  sound: {fileID: 8300000, guid: 725e4f68cf50f9042b86c3be78e90eae, type: 3}
 --- !u!4 &1591811459
 Transform:
   m_ObjectHideFlags: 0
