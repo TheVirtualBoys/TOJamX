@@ -1,9 +1,14 @@
 fileFormatVersion: 2
 guid: e74244a89bc3bdb4d904e716a74236e4
-timeCreated: 1430616827
+timeCreated: 1430668958
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: idle
+    21300002: powerup
+    21300004: attack0
+    21300006: attack1
+    21300008: hit
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -37,7 +42,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 1
@@ -48,7 +53,57 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: idle
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 193
+        width: 124
+        height: 53
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: powerup
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 176
+        width: 60
+        height: 78
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: attack0
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 85
+        width: 80
+        height: 80
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: attack1
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 85
+        width: 80
+        height: 80
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hit
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 15
+        width: 120
+        height: 53
+      alignment: 7
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
