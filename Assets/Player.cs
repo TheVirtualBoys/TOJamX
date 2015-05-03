@@ -107,7 +107,7 @@ public class Player : GameplayInputHandler
 
 		counts += " Indices = ";
 		
-		foreach (var num in sm_arcIndices)
+		foreach (var num in m_arcIndices)
 		{
 			counts += num + ", ";
 		}
