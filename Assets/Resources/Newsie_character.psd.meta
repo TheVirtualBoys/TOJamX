@@ -9,6 +9,9 @@ TextureImporter:
     21300004: attack0
     21300006: attack1
     21300008: hit
+    21300010: idle1
+    21300012: powerup1
+    21300014: hit1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
