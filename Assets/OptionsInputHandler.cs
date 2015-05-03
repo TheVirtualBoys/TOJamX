@@ -23,8 +23,25 @@ public class OptionsInputHandler : MonoBehaviour
 		player = Main.GetPlayer((int)playerID); //ensures exists etc
 
 		Transform parentTransform = GameObject.Find("GlobalRoot").transform;
-		player.transform.parent = parentTransform;
+		player.transform.parent   = parentTransform;
 		player.transform.position = parentTransform.position;
+		Vector3 pos               = Vector3.zero;
+		switch (playerID)
+		{
+			case PlayerIndex.One:
+				pos = new Vector3(Screen.width / 4, Screen.height / 18, 1.0f);
+			break;
+			case PlayerIndex.Two:
+				pos = new Vector3(Screen.width / 4 * 3, Screen.height / 18, 1.0f);
+			break;
+			case PlayerIndex.Three:
+				pos = new Vector3(Screen.width / 8 * 3, Screen.height / 10, 1.5f);
+			break;
+			case PlayerIndex.Four:
+				pos = new Vector3(Screen.width / 8 * 6, Screen.height / 10, 1.5f);
+			break;
+		}
+		player.transform.localPosition = pos;
 
 		//just setup the grid once (this script runs char picker)
 		if ( grid == null )

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a7fc82d5413fe994fbd663962f1f977d
-timeCreated: 1430674822
+guid: 4e881228a03ff884e801b48901347519
+timeCreated: 1430676111
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,9 +9,6 @@ TextureImporter:
     21300004: attack0
     21300006: attack1
     21300008: hit
-    21300010: idle2
-    21300012: powerup1
-    21300014: hit1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,7 +45,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 1
+  alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 1
@@ -60,82 +57,52 @@ TextureImporter:
     - name: idle
       rect:
         serializedVersion: 2
-        x: 0
-        y: 172
-        width: 79
-        height: 82
-      alignment: 9
-      pivot: {x: .30218333, y: 1.86082787e-07}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: idle2
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 172
-        width: 79
-        height: 82
-      alignment: 9
-      pivot: {x: .30218333, y: 1.86082787e-07}
+        x: 14
+        y: 160
+        width: 47
+        height: 86
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: powerup
       rect:
         serializedVersion: 2
-        x: 81
-        y: 172
-        width: 95
-        height: 84
-      alignment: 7
-      pivot: {x: .5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: powerup1
-      rect:
-        serializedVersion: 2
-        x: 81
-        y: 172
-        width: 95
-        height: 84
-      alignment: 7
-      pivot: {x: .5, y: 0}
+        x: 89
+        y: 160
+        width: 78
+        height: 86
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack0
       rect:
         serializedVersion: 2
-        x: 184
-        y: 173
-        width: 68
-        height: 83
-      alignment: 9
-      pivot: {x: .641425192, y: .00724185817}
+        x: 180
+        y: 160
+        width: 43
+        height: 86
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 76
-        width: 100
-        height: 92
-      alignment: 9
-      pivot: {x: .235534459, y: .00653333263}
+        x: 18
+        y: 45
+        width: 67
+        height: 84
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: hit
       rect:
         serializedVersion: 2
-        x: 109
-        y: 72
-        width: 95
+        x: 146
+        y: 39
+        width: 78
         height: 85
-      alignment: 9
-      pivot: {x: .778074563, y: -1.79515169e-07}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: hit1
-      rect:
-        serializedVersion: 2
-        x: 109
-        y: 72
-        width: 95
-        height: 85
-      alignment: 9
-      pivot: {x: .778074563, y: -1.79515169e-07}
+      alignment: 0
+      pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
