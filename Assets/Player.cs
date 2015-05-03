@@ -106,8 +106,8 @@ public class Player : GameplayInputHandler
 		counts += m_cancels.Count;
 
 		counts += " Indices = ";
-		
-		foreach (var num in m_arcIndices)
+
+		foreach (var num in sm_arcIndices)
 		{
 			counts += num + ", ";
 		}
