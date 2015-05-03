@@ -111,6 +111,11 @@ MonoBehaviour:
   musicClips:
   - {fileID: 8300000, guid: da4118475af87114eb09a9007a8ea0b2, type: 3}
   sfxClips:
+  - {fileID: 8300000, guid: 725e4f68cf50f9042b86c3be78e90eae, type: 3}
+  - {fileID: 8300000, guid: 2effc3ca81203a84aa0a522437724f98, type: 3}
+  - {fileID: 8300000, guid: 38bab5f3bd566944a859e38caaa689bb, type: 3}
+  - {fileID: 8300000, guid: 21d64ea75148dc647af56de7849d24cb, type: 3}
+  - {fileID: 8300000, guid: 032d35bad39844c4a9c204245562ec00, type: 3}
   - {fileID: 8300000, guid: bae9224f09d8e984dabf93849e97f472, type: 3}
 --- !u!114 &11498410
 MonoBehaviour:
