@@ -20,8 +20,6 @@ public class Player : GameplayInputHandler
 	public const int m_maxHealth = 20;
 	private bool m_startedDeathEnd;
 
-	public Text m_healthText;
-	public Text m_queueText;
 	public GameObject m_healthBar;
 	public GameObject m_powerBar;
 
@@ -146,11 +144,6 @@ public class Player : GameplayInputHandler
 
 		Debug.Log ( counts );
 
-		if (m_healthText != null)
-		{
-			m_healthText.text = m_health.ToString();
-		}
-
 		//healthbar
 		{
 			float fullScale = 101.0f * (float)m_health / (float)m_maxHealth;
@@ -167,12 +160,7 @@ public class Player : GameplayInputHandler
 			m_powerBar.transform.localScale = scale;
 		}
 
-		if (m_queueText != null)
-		{
-			m_queueText.text = (Main.QUEUED_THROW_COUNT - m_queuedThrows.Count).ToString(); 
-		}
-
-
+	
 		if (!m_startedDeathEnd && IsDead())
 		{
 			m_startedDeathEnd = true;
