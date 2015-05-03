@@ -20,13 +20,7 @@ public class OptionsInputHandler : MonoBehaviour
 			return;
 		}
 
-		if (Main.childPlayers[(int)playerID] == null)
-		{
-			GameObject go = new GameObject("Player" + playerID);
-			player = go.AddComponent<Player>();
-			player.playerIndex = playerID;
-			Main.childPlayers[(int)playerID] = player;
-		}
+		player = Main.GetPlayer((int)playerID); //ensures exists etc
 
 		Transform parentTransform = GameObject.Find("ActiveChar" + playerID).transform;
 		player.transform.parent = parentTransform;
@@ -80,6 +74,8 @@ public class OptionsInputHandler : MonoBehaviour
 
 	void Update()
 	{
+		player.InputEnabled( false );
+
 		if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Dear god the casts!
 		{
 		//if (Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID + 1))))) // Dear god the casts!

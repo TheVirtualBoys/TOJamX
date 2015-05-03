@@ -41,6 +41,22 @@ public class Main : MonoBehaviour
 		numConfirmed = 0;
 	}
 
+	public static Player GetPlayer(int which)
+	{
+		//if non existant, instantiate players, then enable player input
+		for( int i = 0; i <= which; i++ )
+		{
+			if (Main.childPlayers[i] == null)
+			{
+				GameObject go = new GameObject("Player" + i);
+				Main.childPlayers[i] = go.AddComponent<Player>();
+				Main.childPlayers[i].playerIndex = (PlayerIndex)i;
+			}
+		}
+		return childPlayers[which];
+	}
+
+		
 	public static void SetPlayerCharacter(PlayerIndex player, CharacterFactory.Characters character)
 	{
 		childPlayers[(int)player].SetCharacter( character );
