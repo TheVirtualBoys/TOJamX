@@ -330,6 +330,7 @@ MonoBehaviour:
   clipToPlay: {fileID: 8300000, guid: 9bcd6629e0a2f444bad58c39fe9f368c, type: 3}
   fadeInSeconds: .150000006
   fadeOutSeconds: .150000006
+  loopMusic: 1
 --- !u!1 &797211197
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +846,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 477892, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -875,8 +880,32 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 477892, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 2effc3ca81203a84aa0a522437724f98, type: 3}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 38bab5f3bd566944a859e38caaa689bb, type: 3}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 21d64ea75148dc647af56de7849d24cb, type: 3}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 032d35bad39844c4a9c204245562ec00, type: 3}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: bae9224f09d8e984dabf93849e97f472, type: 3}
+    - target: {fileID: 11405366, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
+      propertyPath: sfxClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 725e4f68cf50f9042b86c3be78e90eae, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f9f7f5f2d0a4af246936b69373c1f98e, type: 2}
   m_IsPrefabParent: 0

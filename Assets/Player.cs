@@ -21,6 +21,8 @@ public class Player : GameplayInputHandler
 	public const int m_maxHealth = 20;
 	private bool m_startedDeathEnd;
 
+	private bool m_isFlushing = false;
+
 	public GameObject m_healthBar;
 	public GameObject m_powerBar;
 	public GameObject m_explosion;
@@ -61,17 +63,33 @@ public class Player : GameplayInputHandler
 
 	public bool ReadyToFlush()
 	{
-		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0);
+		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0 && !m_isFlushing);
 	}
 
 	public void FlushThrows()
 	{
+		m_isFlushing = true;
+
+		int i = 0;
 		foreach(var thing in m_queuedThrows)
 		{
-			createProjectile(thing);
+			Utils.AddTimer(0.05f*i + Random.Range(0.0f, 0.1f), ThrowProjectile);
+				i++;
 		}
+	}
 
-		m_queuedThrows.Clear();
+	public void ThrowProjectile()
+	{
+		if (m_queuedThrows.Count > 1)
+		{
+			createProjectile(m_queuedThrows[0]);
+			m_queuedThrows.RemoveAt(0);
+		}
+		else
+		{
+			m_queuedThrows.Clear();
+			m_isFlushing = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -276,7 +294,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Rock );
 			}
@@ -287,7 +305,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Paper );
 			}
@@ -298,7 +316,7 @@ public class Player : GameplayInputHandler
 	{
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && !m_isFlushing)
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Scissors );
 			}
