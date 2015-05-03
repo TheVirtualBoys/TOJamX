@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 0840421889302eb479e34b02f0c665a4
-timeCreated: 1430674258
+timeCreated: 1430676495
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -61,8 +61,18 @@ TextureImporter:
         y: 171
         width: 29
         height: 47
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .649999976, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: idle1
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 171
+        width: 29
+        height: 47
+      alignment: 9
+      pivot: {x: .649999976, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: powerup
       rect:
@@ -71,8 +81,18 @@ TextureImporter:
         y: 171
         width: 21
         height: 43
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .709999979, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: powerup1
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 171
+        width: 21
+        height: 43
+      alignment: 9
+      pivot: {x: .709999979, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack0
       rect:
@@ -81,8 +101,8 @@ TextureImporter:
         y: 171
         width: 28
         height: 70
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .639999986, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack1
       rect:
@@ -91,8 +111,8 @@ TextureImporter:
         y: 171
         width: 44
         height: 69
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .774999976, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: hit
       rect:
@@ -101,8 +121,18 @@ TextureImporter:
         y: 85
         width: 48
         height: 53
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hit1
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 85
+        width: 48
+        height: 53
+      alignment: 9
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
