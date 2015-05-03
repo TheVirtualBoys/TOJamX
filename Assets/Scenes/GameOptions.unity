@@ -285,6 +285,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 784686934}
   - 114: {fileID: 784686933}
+  - 114: {fileID: 784686935}
   m_Layer: 0
   m_Name: LevelRoot
   m_TagString: Untagged
@@ -315,6 +316,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &784686935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 784686932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cc00bb59437a5488bdd1dbd4fef986, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipToPlay: {fileID: 8300000, guid: 9bcd6629e0a2f444bad58c39fe9f368c, type: 3}
+  fadeInSeconds: .150000006
+  fadeOutSeconds: .150000006
 --- !u!1 &797211197
 GameObject:
   m_ObjectHideFlags: 0

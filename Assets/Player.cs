@@ -13,6 +13,7 @@ public class Player : GameplayInputHandler
 	private List<GameObject> m_throws;
 	private List<GameObject> m_cancels;
 	public Player m_targetPlayer = null;
+	public Animator m_animator = null;
 
 	private List<RPSFactory.Type> m_queuedThrows = new List<RPSFactory.Type>();
 
@@ -145,6 +146,7 @@ public class Player : GameplayInputHandler
 		Debug.Log ( counts );
 
 		//healthbar
+		if (m_healthBar)
 		{
 			float fullScale = 101.0f * (float)m_health / (float)m_maxHealth;
 			Vector3 scale = m_healthBar.transform.localScale;
@@ -154,6 +156,7 @@ public class Player : GameplayInputHandler
 		}
 
 		//powerbar
+		if (m_powerBar)
 		{
 			Vector3 scale = m_powerBar.transform.localScale;
 			scale.y = Mathf.Max(1, 200.0f * (float)m_queuedThrows.Count / (float)Main.QUEUED_THROW_COUNT );
@@ -167,9 +170,14 @@ public class Player : GameplayInputHandler
 			Utils.AddTimer(5.0f, OnDeathComplete);
 		}
 	}
-		               	
-    public void OnDeathComplete()
-    {
+
+	public void SetAnimState(CharacterFactory.CharacterAnim anim)
+	{
+		m_animator.SetInteger("state", (int)anim);
+	}
+
+	public void OnDeathComplete()
+	{
 		Application.LoadLevel("Results");
 	}
 
@@ -182,6 +190,7 @@ public class Player : GameplayInputHandler
 			m_childPlayerPrefab = CharacterFactory.GetInst().Create( which );
 			m_childPlayerPrefab.gameObject.transform.parent = transform;
 			m_childPlayerPrefab.gameObject.transform.position = transform.position;
+			m_animator = m_childPlayerPrefab.GetComponent<Animator>();
 
 			playerClass = which;
 		}
