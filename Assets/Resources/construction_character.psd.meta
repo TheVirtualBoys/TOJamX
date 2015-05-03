@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: aa7473d310b38f84fabd6a93cb0c8f33
-timeCreated: 1430684285
+timeCreated: 1430692833
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -9,9 +9,6 @@ TextureImporter:
     21300004: attack0
     21300006: attack1
     21300008: hit
-    21300010: idle1
-    21300012: powerup1
-    21300014: hit1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -64,8 +61,8 @@ TextureImporter:
         y: 160
         width: 49
         height: 70
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: powerup1
       rect:
@@ -74,8 +71,8 @@ TextureImporter:
         y: 160
         width: 64
         height: 92
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .419999987, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: hit1
       rect:
@@ -84,8 +81,8 @@ TextureImporter:
         y: 48
         width: 75
         height: 70
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .360000014, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle
       rect:
@@ -94,8 +91,8 @@ TextureImporter:
         y: 160
         width: 49
         height: 70
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: powerup
       rect:
@@ -104,8 +101,8 @@ TextureImporter:
         y: 160
         width: 64
         height: 92
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .419999987, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack0
       rect:
@@ -114,8 +111,8 @@ TextureImporter:
         y: 157
         width: 48
         height: 69
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .699999988, y: .0399999991}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack1
       rect:
@@ -124,8 +121,8 @@ TextureImporter:
         y: 47
         width: 69
         height: 95
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .460000008, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: hit
       rect:
@@ -134,8 +131,8 @@ TextureImporter:
         y: 48
         width: 75
         height: 70
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      alignment: 9
+      pivot: {x: .360000014, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
