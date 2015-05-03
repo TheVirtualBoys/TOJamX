@@ -9,7 +9,10 @@ public class ProjectileHandler : MonoBehaviour {
 	private Vector2 m_end;
 	public float variance;
 	private float m_startTime;
+	public float m_currentT;
+	public float m_endT;
 	public bool m_seppuku;
+	public int m_arc;
 
 	// Use this for initialization
 	void Start () {
@@ -18,38 +21,38 @@ public class ProjectileHandler : MonoBehaviour {
 		m_seppuku = false;
 	}
 
-	public int SetArc( Vector2 start, Vector2 end )
+	public void SetArc( int whichArc, Vector2 start, Vector2 end )
 	{
 		m_start = start; //avoid flicker from transform start pos to spline start
 		transform.position = start;
 		m_end = end;
 
-		int whichArc = Random.Range( 0, Player.arcs );
+		m_arc = whichArc;
 		float variation = (float)whichArc / (float)(Player.arcs - 1); //variation needs to be 0-1 inclusive
 		
 		//find perpendicular to path
 		Vector2 line = end - start;
 		line.Normalize();
 		Vector2 perpendicular = new Vector2( -line.y, line.x );
-		
+		//to ensure perpendicular is the same whether arc is viewed a-b or b-a, prefer y positive perpendiculars.
+		if ( perpendicular.y < 0.0f ) { perpendicular = -perpendicular; }
+
 		//select which of the arc middles we want
 		Vector2 lowVariant = middle - perpendicular * variance;
 		Vector2 highVariant = middle + perpendicular * variance;
 		middle = Vector2.Lerp( lowVariant, highVariant, variation );
-
-		return whichArc;
 	}
 
 	// Update is called once per frame
 	void Update () {
 		float elapsed = Time.time - m_startTime;
-		float arc = Mathf.Min( elapsed / duration, 1.0f );
-		Vector2 splinePos = Utils.SplineLerp( m_start, middle, m_end, arc );
+		m_currentT = Mathf.Min( elapsed / duration, m_endT );
+		Vector2 splinePos = Utils.SplineLerp( m_start, middle, m_end, m_currentT );
 
 		transform.position = new Vector3( splinePos.x, splinePos.y, 1.0f );
 
 		//if we're done set the flag were ready for honorable death
-		if ( arc == 1.0f )
+		if ( m_currentT >= m_endT )
 		{
 			m_seppuku = true;
 			//JEFF, if this projectile is colliding in the middle, use SmallExplosionTest instead

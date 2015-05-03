@@ -8,8 +8,10 @@ public class Player : GameplayInputHandler
 {
 	public CharacterFactory.Characters playerClass;
 	public const int arcs = 3;
+	private List<int> m_arcIndices;
 	private GameObject m_childPlayerPrefab = null;
-	private List<GameObject>[] m_throws = new List<GameObject>[arcs]; //one list per arc
+	private List<GameObject> m_throws;
+	private List<GameObject> m_cancels;
 	public Player m_targetPlayer = null;
 
 
@@ -17,10 +19,10 @@ public class Player : GameplayInputHandler
 	public override void Start () {
 		base.Start();
 		SetCharacter( playerClass );
-		for( int i = 0; i < arcs; i++ )
-		{
-			m_throws[i] = new List<GameObject>();
-		}
+		m_arcIndices = new List<int>();
+		for( int i = 0; i < arcs; i++ ) { m_arcIndices.Add ( i ); }
+		m_throws = new List<GameObject>();
+		m_cancels = new List<GameObject>();
 	}
 	
 	// Update is called once per frame
@@ -33,20 +35,26 @@ public class Player : GameplayInputHandler
 
 
 
-		string counts = "- ";
-		for( int i = 0; i < arcs; i++ )
+		string counts = "throws-";
+		//eliminate those who are ready
+		while( m_throws.Count > 0 && m_throws[0].GetComponent<ProjectileHandler>().m_seppuku )
 		{
-			//eliminate those who are ready
-			List<GameObject> throwArc = m_throws[i];
-			while( throwArc.Count > 0 && throwArc[0].GetComponent<ProjectileHandler>().m_seppuku )
-			{
-				Destroy ( throwArc[0] );
-				throwArc.RemoveAt( 0 );
-			}
-
-			counts += m_throws[i].Count;
-			counts += ", ";
+			m_arcIndices.Add ( m_throws[0].GetComponent<ProjectileHandler>().m_arc );
+			Destroy ( m_throws[0] );
+			m_throws.RemoveAt( 0 );
 		}
+		counts += m_throws.Count;
+
+		counts += " -cancels-";
+		//eliminate those who are ready
+		while( m_cancels.Count > 0 && m_cancels[0].GetComponent<ProjectileHandler>().m_seppuku )
+		{
+			m_arcIndices.Add ( m_cancels[0].GetComponent<ProjectileHandler>().m_arc );
+			Destroy ( m_cancels[0] );
+			m_cancels.RemoveAt( 0 );
+		}
+		counts += m_cancels.Count;
+
 		Debug.Log ( counts );
 
 	}
@@ -65,31 +73,72 @@ public class Player : GameplayInputHandler
 		}
 	}
 
+	private void cancelWinningThrow()
+	{
+		m_cancels.Add( m_throws[0] ); //move
+		m_throws.RemoveAt (0); //clean from throw list
+	}
+
+	private void cancelLosingThrow(float killingT)
+	{
+		GameObject go = m_throws[0];
+		ProjectileHandler ph = go.GetComponent<ProjectileHandler>();
+
+		cancelWinningThrow(); //moves it for us
+
+		//set rps to die at time of collide
+		//winner & loser share the arc's T=1 travel.  thus 1 >= the sum of their T's, and 1 - their sum gives you remaining flight T
+		ph.m_endT = ph.m_currentT + ( 1.0f - killingT - ph.m_currentT ) / 2.0f; //opposing object will hit us at halfway from current to m_endT
+	}
+
 	private void createProjectile( RPSFactory.Type type )
 	{
 		GameObject myGO = RPSFactory.GetInst().Create( type );
 		myGO.transform.parent = transform;
 		ProjectileHandler myPH = myGO.GetComponent<ProjectileHandler>();
-/*		RPSLogic myRPS = myGO.GetComponent<RPSLogic>();
+		RPSLogic myRPS = myGO.GetComponent<RPSLogic>();
 
-		//figure out if a cancel is possible
-		//search for arc with a possible cancel
-		int arcToCancel = -1;
-		for ( int i = 0; i < arcs; i++ )
+		//Decide how to throw based on opponent's airborne throws
+
+		//configure place throw
+		m_throws.Add( myGO );
+
+		//with throw placed, as best as possible
+		int whichArc;
+		if ( m_targetPlayer.m_throws.Count > 0 )
 		{
-			List<GameObject> arc = m_targetPlayer.m_throws[i];
-			if ( arc.Count > 0 ) 
+			GameObject theirGO = m_targetPlayer.m_throws[0];
+			ProjectileHandler theirPH = theirGO.GetComponent<ProjectileHandler>();
+			whichArc = theirPH.m_arc;
+			m_arcIndices.RemoveAt( m_arcIndices.Find ( x => x == whichArc ));
+
+			RPSLogic theirRPS = theirGO.GetComponent<RPSLogic>();
+			if ( myRPS.beats( theirRPS ) )
 			{
-				GameObject theirGO = arc[arc.Count - 1];
-				RPSLogic theirRPS = theirGO.GetComponent<RPSLogic>();
+				cancelWinningThrow();
+				m_targetPlayer.cancelLosingThrow( myPH.m_currentT );
+			}
+			else if ( myRPS.equals( theirRPS ) )
+			{
+				cancelLosingThrow( theirPH.m_currentT );
+				m_targetPlayer.cancelLosingThrow( myPH.m_currentT );
+			}
+			else
+			{ 
+				cancelLosingThrow( theirPH.m_currentT );
+				m_targetPlayer.cancelWinningThrow();
+			}
+		}
+		else
+		{
+			//when there's nothing to aim for, randomize arc
+			int arcIndex = Random.Range(0, m_arcIndices.Count);
+			whichArc = m_arcIndices[arcIndex];
+			m_arcIndices.RemoveAt( arcIndex );
+		}
 
-				if ( myRPS.
-*/
-
-
-		//set proj arc endpoints.  It tells us which arc it went on
-		int whichArc = myPH.SetArc( transform.position, m_targetPlayer.transform.position );
-		m_throws[ whichArc ].Add ( myGO );
+		//finally, configure visual path
+		myPH.SetArc( whichArc, transform.position, m_targetPlayer.transform.position );
 	}
 
 	public override void ThrowRock()
