@@ -55,8 +55,6 @@ public class ProjectileHandler : MonoBehaviour {
 		if ( m_currentT >= m_endT )
 		{
 			m_seppuku = true;
-			//JEFF, if this projectile is colliding in the middle, use SmallExplosionTest instead
-			AudioHandler.PlaySoundEffect("Hurt" + Random.Range(1, 3)); // second number is exclusive...
 		}
 	}
 }
