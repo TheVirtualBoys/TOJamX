@@ -54,6 +54,36 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
+    - name: idle1
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 160
+        width: 49
+        height: 70
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: powerup1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 160
+        width: 64
+        height: 92
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: hit1
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 48
+        width: 75
+        height: 70
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
     - name: idle
       rect:
         serializedVersion: 2
