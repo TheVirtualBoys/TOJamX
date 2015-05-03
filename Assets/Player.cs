@@ -7,6 +7,7 @@ public class Player : GameplayInputHandler
 {
 	public CharacterFactory.Characters playerClass;
 	private GameObject m_childPlayerPrefab = null;
+
 	public Player m_targetPlayer = null;
 
 	// Use this for initialization
@@ -18,6 +19,10 @@ public class Player : GameplayInputHandler
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
+
+		//HACKJEFFGIFFEN //should be dynamic on stick direction per frame
+		int targetIndex = 1 - (int)playerIndex; //binary invert :-D
+		m_targetPlayer = Main.GetPlayer ( targetIndex );
 	}
 
 	public void SetCharacter( CharacterFactory.Characters which )
@@ -39,7 +44,10 @@ public class Player : GameplayInputHandler
 		GameObject thing = RPSFactory.GetInst().Create( type );
 		thing.transform.parent = transform;
 		ProjectileHandler ph = thing.GetComponent<ProjectileHandler>();
+
+		//set proj arc endpoints
 		ph.start = transform.position;
+		ph.end = m_targetPlayer.transform.position;
 	}
 
 	public override void ThrowRock()

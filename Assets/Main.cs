@@ -49,8 +49,8 @@ public class Main : MonoBehaviour
 			if (Main.childPlayers[i] == null)
 			{
 				GameObject go = new GameObject("Player" + i);
-				Main.childPlayers[i] = go.AddComponent<Player>();
-				Main.childPlayers[i].playerIndex = (PlayerIndex)i;
+				childPlayers[i] = go.AddComponent<Player>();
+				childPlayers[i].playerIndex = (PlayerIndex)i;
 			}
 		}
 		return childPlayers[which];
