@@ -26,8 +26,15 @@ public class ClearGameData : MonoBehaviour {
 	{
 		if (IsResultScreen)
 		{
-			GameObject.Find ("Player0").transform.position = GameObject.Find("Player0Anchor").transform.position;
-			GameObject.Find ("Player1").transform.position = GameObject.Find("Player1Anchor").transform.position;
+			//init players for this state
+			for( int i = 0; i < Main.numPlayers; i++ )
+			{
+				Player p = Main.GetPlayer ( i );
+
+				Transform anchor = GameObject.Find ("Player" + i + "Anchor").transform;
+				//p.gameObject.transform.parent = anchor;
+				p.gameObject.transform.position = anchor.position;
+			}
 		}
 	}
 }
