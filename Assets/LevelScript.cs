@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelScript : MonoBehaviour {
 
@@ -18,6 +19,9 @@ public class LevelScript : MonoBehaviour {
 			Transform anchor = GameObject.Find ("PlayerAnchor" + i).transform;
 			p.gameObject.transform.parent = anchor;
 			p.gameObject.transform.position = anchor.position;
+
+			p.m_healthText = GameObject.Find("Player" + p.playerIndex.ToString() + "Health").GetComponent<Text>();
+			p.m_queueText = GameObject.Find ("Player" + p.playerIndex.ToString() + "Queue").GetComponent<Text>();
 		}
 
 //		m_elapsedSinceSpawn = 0;
@@ -25,6 +29,29 @@ public class LevelScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+		bool readyForFlush = true;
+
+		for( int i = 0; i < Main.numPlayers; i++ )
+		{
+			Player p = Main.GetPlayer(i);
+
+			if (!p.ReadyToFlush())
+			{
+				readyForFlush = false;
+			}
+		}
+
+		if (readyForFlush)
+		{
+			for( int i = 0; i < Main.numPlayers; i++)
+			{
+				Player p = Main.GetPlayer(i);
+
+				p.FlushThrows();
+			}
+		}
+
 /*		m_elapsedSinceSpawn += Time.deltaTime;
 		while( m_elapsedSinceSpawn >= dbgSpawnWaitDuration )
 		{

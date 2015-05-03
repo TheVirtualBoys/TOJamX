@@ -9,7 +9,8 @@ public class Main : MonoBehaviour
 
 	//fun datas of funtimes
 	public static short numPlayers      = 2;
-	public static short numConfirmed = 0;
+	public static short numConfirmed 	= 0;
+	public const short QUEUED_THROW_COUNT = 5;
 	public const short MAX_PLAYERS      = 4;
 	public static Player[] childPlayers = new Player[Main.MAX_PLAYERS];
 
