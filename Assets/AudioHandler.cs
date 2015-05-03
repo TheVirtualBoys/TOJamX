@@ -15,6 +15,8 @@ public class AudioHandler : MonoBehaviour {
 	static bool s_fadingOut = false;
 	static AudioClip s_nextMusicToPlay = null;
 
+	static bool s_loopMusic = true;
+
 	public AudioClip[] musicClips;
 	public AudioClip[] sfxClips;
 
@@ -65,7 +67,7 @@ public class AudioHandler : MonoBehaviour {
 				s_currentTimeSeconds = 0.0f;
 
 				AudioSource source = s_musicEmitterObject.GetComponent<AudioSource>();
-				source.loop = true;
+				source.loop = s_loopMusic;
 				source.clip = s_nextMusicToPlay;
 				source.volume = 0.0f;
 				source.Play();
@@ -135,17 +137,23 @@ public class AudioHandler : MonoBehaviour {
 	{
 		PlayMusic(audio, fadeInTimeSeconds, 0.0f);
 	}
-	
-	public static void PlayMusic(AudioClip audio, float fadeInTimeSeconds, float fadeOutTimeSeconds)
+
+	public static void PlayMusic(AudioClip audio, float fadeInTimeSeconds, float fadeOutTimeSeconds, bool loopMusic)
 	{
 		if (disableAudio)
 			return;
-
+		
 		s_nextMusicToPlay = audio;
 		s_fadeInTimeSeconds = fadeInTimeSeconds;
 		s_fadeOutTimeSeconds = fadeOutTimeSeconds;
 		s_currentTimeSeconds = 0.0f;
+		s_loopMusic = loopMusic;
 		s_fadingOut = true;
+	}
+
+	public static void PlayMusic(AudioClip audio, float fadeInTimeSeconds, float fadeOutTimeSeconds)
+	{
+		PlayMusic(audio, fadeInTimeSeconds, fadeOutTimeSeconds, true);
 	}
 
 
