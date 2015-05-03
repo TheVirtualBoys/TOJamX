@@ -23,6 +23,7 @@ public class LevelScript : MonoBehaviour {
 			p.m_healthText = GameObject.Find("Player" + p.playerIndex.ToString() + "Health").GetComponent<Text>();
 			p.m_queueText = GameObject.Find ("Player" + p.playerIndex.ToString() + "Queue").GetComponent<Text>();
 			p.m_healthBar = GameObject.Find ("HealthBar" + (int)p.playerIndex);
+			p.m_powerBar = GameObject.Find ( "PowerBar" + (int)p.playerIndex);
 		}
 
 //		m_elapsedSinceSpawn = 0;
