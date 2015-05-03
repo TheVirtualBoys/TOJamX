@@ -6,6 +6,8 @@ public class SwitchScreenOnInput : MonoBehaviour {
 	public string [] acceptedInputs;
 	public string levelToLoad;
 
+	public AudioClip sound;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -17,6 +19,11 @@ public class SwitchScreenOnInput : MonoBehaviour {
 		{
 			if (Input.GetKeyDown(input))
 			{
+				if (sound != null)
+				{
+					AudioHandler.PlaySoundEffect(sound);
+				}
+
 				Application.LoadLevel(levelToLoad);
 			}
 		}
