@@ -14,11 +14,17 @@ public class Player : GameplayInputHandler
 	private List<GameObject> m_cancels;
 	public Player m_targetPlayer = null;
 
+	private bool m_flushingQueue = false;
+
 	private List<RPSFactory.Type> m_queuedThrows = new List<RPSFactory.Type>();
 
 	public int m_health;
 	public const int m_maxHealth = 20;
 	private bool m_startedDeathEnd;
+
+	const float rangeMin = 0.00f;
+	const float rangeMax = 0.15f;
+	const float randomSecondsDelay = 0.04f;
 
 	public Text m_healthText;
 	public Text m_queueText;
@@ -58,19 +64,40 @@ public class Player : GameplayInputHandler
 		return m_health <= 0;
 	}
 
+	public bool ReadyToAcceptInput()
+	{
+		return (m_throws.Count == 0 && m_cancels.Count == 0 && !m_flushingQueue);
+	}
+
 	public bool ReadyToFlush()
 	{
-		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && m_throws.Count == 0 && m_cancels.Count == 0);
+		return (Main.QUEUED_THROW_COUNT == m_queuedThrows.Count && ReadyToAcceptInput());
 	}
 
 	public void FlushThrows()
 	{
-		foreach(var thing in m_queuedThrows)
-		{
-			createProjectile(thing);
-		}
+		m_flushingQueue = true;
 
-		m_queuedThrows.Clear();
+		for (int i = 0; i < m_queuedThrows.Count; ++i)
+		{
+			Utils.AddTimer((randomSecondsDelay * i) + (Random.Range(rangeMin, rangeMax)), RunSingleProjectile); 
+		}
+	}
+
+	public void RunSingleProjectile()
+	{
+		if (m_queuedThrows.Count > 1)
+		{
+			createProjectile(m_queuedThrows[0]);
+			m_queuedThrows.RemoveAt(0);
+		}
+		else
+		{
+			createProjectile(m_queuedThrows[0]);
+
+			m_queuedThrows.Clear();
+			m_flushingQueue = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -143,7 +170,7 @@ public class Player : GameplayInputHandler
 			counts += num + ", ";
 		}
 
-		Debug.Log ( counts );
+		//Debug.Log ( counts );
 
 		if (m_healthText != null)
 		{
@@ -157,14 +184,21 @@ public class Player : GameplayInputHandler
 
 		if (m_queueText != null)
 		{
-			m_queueText.text = (Main.QUEUED_THROW_COUNT - m_queuedThrows.Count).ToString(); 
+			if (!ReadyToAcceptInput())
+			{
+				m_queueText.text = "0";
+			}
+			else
+			{
+				m_queueText.text = (Main.QUEUED_THROW_COUNT - m_queuedThrows.Count).ToString(); 
+			}
 		}
 
 
 		if (!m_startedDeathEnd && IsDead())
 		{
 			m_startedDeathEnd = true;
-			Utils.AddTimer(5.0f, OnDeathComplete);
+			Utils.AddTimer(4.0f, OnDeathComplete);
 		}
 	}
 		               	
@@ -257,9 +291,12 @@ public class Player : GameplayInputHandler
 
 	public override void ThrowRock()
 	{
+		if (m_targetPlayer == null)
+			return;
+
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && ReadyToAcceptInput())
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Rock );
 			}
@@ -268,9 +305,12 @@ public class Player : GameplayInputHandler
 	
 	public override void ThrowPaper()
 	{
+		if (m_targetPlayer == null)
+			return;
+
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && ReadyToAcceptInput())
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Paper );
 			}
@@ -279,9 +319,12 @@ public class Player : GameplayInputHandler
 	
 	public override void ThrowScissors()
 	{
+		if (m_targetPlayer == null)
+			return;
+
 		if (!IsDead() && !m_targetPlayer.IsDead())
 		{
-			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT)
+			if (m_queuedThrows.Count < Main.QUEUED_THROW_COUNT && ReadyToAcceptInput())
 			{
 				m_queuedThrows.Add( RPSFactory.Type.Scissors );
 			}
