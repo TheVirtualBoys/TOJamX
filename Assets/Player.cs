@@ -14,17 +14,32 @@ public class Player : GameplayInputHandler
 	private List<GameObject> m_cancels;
 	public Player m_targetPlayer = null;
 
+	public int m_health;
+	private bool m_startedDeathEnd;
+
 
 	// Use this for initialization
 	public override void Start () {
 		base.Start();
+		m_health = 20;
+		m_startedDeathEnd = false;
 		SetCharacter( playerClass );
 		m_arcIndices = new List<int>();
 		for( int i = 0; i < arcs; i++ ) { m_arcIndices.Add ( i ); }
 		m_throws = new List<GameObject>();
 		m_cancels = new List<GameObject>();
 	}
-	
+
+	public void DoDamage()
+	{
+		m_health -= 1;
+	}
+
+	public bool IsDead()
+	{
+		return m_health <= 0;
+	}
+
 	// Update is called once per frame
 	public override void Update () {
 		base.Update();
@@ -39,6 +54,17 @@ public class Player : GameplayInputHandler
 		//eliminate those who are ready
 		while( m_throws.Count > 0 && m_throws[0].GetComponent<ProjectileHandler>().m_seppuku )
 		{
+			if (Mathf.Approximately(m_throws[0].GetComponent<ProjectileHandler>().m_currentT, 1.0f))
+			{
+				AudioHandler.PlaySoundEffect("Hurt" + Random.Range(1, 3)); // second number is exclusive...
+
+				m_targetPlayer.DoDamage();
+			}
+			else
+			{
+				AudioHandler.PlaySoundEffect("SmallExplosionTest"); // second number is exclusive...
+			}
+				
 			m_arcIndices.Add ( m_throws[0].GetComponent<ProjectileHandler>().m_arc );
 			Destroy ( m_throws[0] );
 			m_throws.RemoveAt( 0 );
@@ -55,8 +81,25 @@ public class Player : GameplayInputHandler
 		}
 		counts += m_cancels.Count;
 
+		counts += " Indices = ";
+		
+		foreach (var num in m_arcIndices)
+		{
+			counts += num + ", ";
+		}
+
 		Debug.Log ( counts );
 
+		if (!m_startedDeathEnd && IsDead())
+		{
+			m_startedDeathEnd = true;
+			Utils.AddTimer(5.0f, OnDeathComplete);
+		}
+	}
+		               	
+    public void OnDeathComplete()
+    {
+		Application.LoadLevel("Results");
 	}
 
 	public void SetCharacter( CharacterFactory.Characters which )
@@ -97,7 +140,7 @@ public class Player : GameplayInputHandler
 		myGO.transform.parent = transform;
 		ProjectileHandler myPH = myGO.GetComponent<ProjectileHandler>();
 		RPSLogic myRPS = myGO.GetComponent<RPSLogic>();
-
+		//myPH.duration = 20;
 		//Decide how to throw based on opponent's airborne throws
 
 		//configure place throw
@@ -143,17 +186,26 @@ public class Player : GameplayInputHandler
 
 	public override void ThrowRock()
 	{
-		createProjectile( RPSFactory.Type.Rock );
+		if (!IsDead())
+		{
+			createProjectile( RPSFactory.Type.Rock );
+		}
 	}
 	
 	public override void ThrowPaper()
 	{
-		createProjectile( RPSFactory.Type.Paper );
+		if (!IsDead())
+		{
+			createProjectile( RPSFactory.Type.Paper );
+		}
 	}
 	
 	public override void ThrowScissors()
 	{
-		createProjectile( RPSFactory.Type.Scissors );
+		if (!IsDead())
+		{
+			createProjectile( RPSFactory.Type.Scissors );
+		}
 	}
 
 }
