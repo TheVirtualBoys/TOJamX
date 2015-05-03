@@ -40,6 +40,26 @@ public class LevelScript : MonoBehaviour {
 			{
 				readyForFlush = false;
 			}
+
+			if (false)
+			{
+				int rand = Random.Range(0, 3);
+
+				if (rand == 0)
+				{
+					p.ThrowRock();
+				}
+
+				if (rand == 1)
+				{
+					p.ThrowPaper();
+				}
+
+				if (rand == 2)
+				{
+					p.ThrowScissors();
+				}
+			}
 		}
 
 		if (readyForFlush)
