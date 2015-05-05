@@ -189,8 +189,6 @@ public class Player : GameplayInputHandler
 			counts += num + ", ";
 		}
 
-		Debug.Log ( counts );
-
 		//healthbar
 		if (m_healthBar)
 		{
