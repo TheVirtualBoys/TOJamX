@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 4e881228a03ff884e801b48901347519
-timeCreated: 1430677355
+timeCreated: 1430783438
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -60,9 +60,9 @@ TextureImporter:
     - name: idle1
       rect:
         serializedVersion: 2
-        x: 14
+        x: 20
         y: 160
-        width: 47
+        width: 48
         height: 86
       alignment: 9
       pivot: {x: .5, y: 0}
@@ -70,9 +70,9 @@ TextureImporter:
     - name: idle
       rect:
         serializedVersion: 2
-        x: 14
+        x: 20
         y: 160
-        width: 47
+        width: 48
         height: 86
       alignment: 9
       pivot: {x: .5, y: 0}
@@ -80,9 +80,9 @@ TextureImporter:
     - name: powerup1
       rect:
         serializedVersion: 2
-        x: 89
+        x: 87
         y: 160
-        width: 78
+        width: 75
         height: 86
       alignment: 9
       pivot: {x: .449999988, y: 0}
@@ -90,9 +90,9 @@ TextureImporter:
     - name: powerup
       rect:
         serializedVersion: 2
-        x: 89
+        x: 87
         y: 160
-        width: 78
+        width: 75
         height: 86
       alignment: 9
       pivot: {x: .449999988, y: 0}
@@ -100,29 +100,29 @@ TextureImporter:
     - name: attack0
       rect:
         serializedVersion: 2
-        x: 180
+        x: 183
         y: 160
-        width: 43
+        width: 44
         height: 86
       alignment: 9
-      pivot: {x: .649999976, y: 0}
+      pivot: {x: .5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: attack1
       rect:
         serializedVersion: 2
         x: 18
         y: 45
-        width: 67
+        width: 74
         height: 84
       alignment: 9
-      pivot: {x: .860000014, y: 0}
+      pivot: {x: .200000003, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
     - name: hit1
       rect:
         serializedVersion: 2
-        x: 146
+        x: 144
         y: 39
-        width: 78
+        width: 79
         height: 85
       alignment: 9
       pivot: {x: .449999988, y: 0}
@@ -130,9 +130,9 @@ TextureImporter:
     - name: hit
       rect:
         serializedVersion: 2
-        x: 146
+        x: 144
         y: 39
-        width: 78
+        width: 79
         height: 85
       alignment: 9
       pivot: {x: .449999988, y: 0}
