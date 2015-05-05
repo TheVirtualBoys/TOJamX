@@ -98,7 +98,10 @@ public class OptionsInputHandler : MonoBehaviour
 	{
 		player.InputEnabled( false );
 
-		if ((playerID == PlayerIndex.One && Input.GetKeyDown(KeyCode.Z)) || (playerID == PlayerIndex.Two && Input.GetKeyDown(KeyCode.X)) || Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Dear god the casts!
+		// Confirm button
+		if ((playerID == PlayerIndex.One && (Input.GetKeyDown(KeyCode.Z) || Input.GetKeyDown(KeyCode.X) || Input.GetKeyDown(KeyCode.C))) // P1 Confirm with Z, X, or C.
+			|| (playerID == PlayerIndex.Two && (Input.GetKeyDown(KeyCode.Keypad1) || Input.GetKeyDown(KeyCode.Keypad2) || Input.GetKeyDown(KeyCode.Keypad2))) // P2 Confirm with numpad 1, 2, or 3.
+			|| Input.GetKeyDown((KeyCode)((int)KeyCode.Joystick1Button0 + (Utils.JOYSTICK_BUTTON_OFFSET * ((int)playerID))))) // Joystick confirm with Button0.
 		{
 			Main.SetPlayerCharacter(playerID, (CharacterFactory.Characters)selection);
 			gameObject.GetComponent<FlashOnSelect>().stopFlashing = true;
@@ -113,9 +116,49 @@ public class OptionsInputHandler : MonoBehaviour
 		{
 			return;
 		}
+
 		float x            = Input.GetAxisRaw("Horiz" + playerID);
 		float y            = Input.GetAxisRaw("Vert" + playerID);
+		if (playerID == PlayerIndex.One)
+		{
+			if (Input.GetKey(KeyCode.A))
+			{
+				x = -1.0f;
+			}
+			else if (Input.GetKey(KeyCode.D))
+			{
+				x = 1.0f;
+			}
+			else if (Input.GetKey(KeyCode.W))
+			{
+				y = 1.0f;
+			}
+			else if (Input.GetKey(KeyCode.S))
+			{
+				y = -1.0f;
+			}
+		}
+		else if (playerID == PlayerIndex.Two)
+		{
+			if (Input.GetKey(KeyCode.LeftArrow))
+			{
+				x = -1.0f;
+			}
+			else if (Input.GetKey(KeyCode.RightArrow))
+			{
+				x = 1.0f;
+			}
+			else if (Input.GetKey(KeyCode.UpArrow))
+			{
+				y = 1.0f;
+			}
+			else if (Input.GetKey(KeyCode.DownArrow))
+			{
+				y = -1.0f;
+			}
+		}
 		byte lastSelection = selection;
+
 		#region gross
 		if (x > 0.3f)
 		{
@@ -254,11 +297,20 @@ public class OptionsInputHandler : MonoBehaviour
 			}
 		}
 		#endregion // gross
+
 		if (lastSelection != selection)
 		{
 			// play a sound and update graphics
 			lastInputTime = Time.timeSinceLevelLoad;
 			SetPlayerSprite(selection);
+		}
+		else if (playerID == PlayerIndex.One && (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D)
+												|| Input.GetKeyUp(KeyCode.Z) || Input.GetKeyUp(KeyCode.X) || Input.GetKeyUp(KeyCode.C))
+				|| playerID == PlayerIndex.Two && (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.RightArrow)
+												|| Input.GetKeyUp(KeyCode.Keypad1) || Input.GetKeyUp(KeyCode.Keypad2) || Input.GetKeyUp(KeyCode.Keypad3))
+				)
+		{
+			lastInputTime = 0.0f;
 		}
 	}
 }
